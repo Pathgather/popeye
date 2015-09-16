@@ -1,0 +1,64 @@
+.pg-modal-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 5;
+  overflow-y: auto;
+  background-color: rgba(76, 147, 234, 0.7);
+  -moz-transition: background-color 0.7s;
+  -o-transition: background-color 0.7s;
+  -webkit-transition: background-color 0.7s;
+  transition: background-color 0.7s; }
+
+.pg-modal-container.ng-enter {
+  background-color: rgba(255, 255, 255, 0); }
+
+.pg-modal-container.ng-enter-active {
+  background-color: rgba(76, 147, 234, 0.7); }
+
+.pg-modal-container.ng-enter .pg-modal {
+  transform: translateY(300%);
+  opacity: 0;
+  transition: transform 0.4s, opacity 0.4s; }
+
+.pg-modal-container.ng-enter-active .pg-modal,
+.pg-modal-container.ng-leave .pg-modal {
+  transform: translateY(0%);
+  opacity: 1; }
+
+.pg-modal-container.ng-leave-active .pg-modal {
+  transform: translateY(300%);
+  transition: transform 0.4s, opacity 0.4s;
+  opacity: 0; }
+
+.pg-modal-container.ng-leave-active {
+  background-color: rgba(255, 255, 255, 0); }
+
+.pg-modal-container .pg-modal {
+  position: relative;
+  display: block;
+  visibility: visible;
+  width: 60%;
+  min-width: 600px;
+  height: 80%;
+  min-height: 400px;
+  margin: 30px auto 0 auto;
+  border-radius: 3px;
+  border: none;
+  z-index: 6;
+  padding: 2em 1.5em 1.5em 1.5em;
+  /* Room for the close btn */
+  background: white;
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  -ms-box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  -o-box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4); }
+
+.pg-modal-container .pg-modal .close-reveal-modal {
+  position: absolute;
+  font-size: 1.5em;
+  color: #999;
+  cursor: pointer; }
