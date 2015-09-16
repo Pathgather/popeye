@@ -48,9 +48,6 @@
     display: block;
     visibility: visible;
     width: 60%;
-    min-width: 600px;
-    height: 80%;
-    min-height: 400px;
     margin: 30px auto 0 auto;
     border-radius: 3px;
     border: none;
