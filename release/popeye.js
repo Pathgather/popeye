@@ -33,6 +33,10 @@
         }
 
         Modal.prototype.resolve = function() {
+          if (this.resolving) {
+            return this.resolved;
+          }
+          this.resolving = true;
           $q.when({}).then((function(_this) {
             return function() {
               var locals, resolve;
@@ -67,6 +71,10 @@
 
         Modal.prototype.open = function() {
           var promise;
+          if (this.opening) {
+            return this.opened;
+          }
+          this.opening = true;
           promise = pendingPromise != null ? pendingPromise = pendingPromise.then((function(_this) {
             return function(prevModal) {
               return prevModal.close().then(function() {

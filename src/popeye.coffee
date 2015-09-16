@@ -30,7 +30,8 @@ popeye = (angular) ->
         # Setup the modal scope, resolve controller locals, etc.
         # Returns the @resolved promise that resolves when complete
         resolve: =>
-          # TODO: throw error if already resolved?
+          return @resolved if @resolving
+          @resolving = true
           $q.when({}).then =>
             locals = angular.extend({}, @options.locals)
             resolve = angular.extend({}, @options.resolve)
@@ -50,7 +51,11 @@ popeye = (angular) ->
 
         # Load the container & modal templates, and add everything to the DOM via $animate
         open: =>
-          # TODO: throw error if already open?
+          return @opened if @opening
+          @opening = true
+
+          # Don't simply start opening this modal - check to see if there's already an active one (or one in the process
+          # of opening), tell it to close, and wait for that before opening ourself
           promise = if pendingPromise?
             # Wait for the pending modal to open...then close it...then return ourself!
             pendingPromise = pendingPromise.then (prevModal) =>
@@ -61,6 +66,7 @@ popeye = (angular) ->
             pendingPromise = @opened
             $q.when()
 
+          # Once we've ensured that all other modals are cleaned up, start opening ourself
           promise.then =>
             @resolve().then =>
               throw new Error("@scope is undefined") unless @scope?
@@ -86,7 +92,6 @@ popeye = (angular) ->
           return @opened
 
         close: (value) =>
-          # TODO: throw error if already closed?
           # Remove the container from the body
           return @closed if @closing
           @closing = true
