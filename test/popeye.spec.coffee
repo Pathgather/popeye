@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 describe "pathgather.popeye", ->
   beforeEach ->
@@ -6,7 +6,7 @@ describe "pathgather.popeye", ->
     testApp = angular
       .module("test", ["pathgather.popeye"])
       .config ($provide) ->
-        # $animate uses $$asyncCallback that uses requestAnimationFrame by default, but it doesn't test well, so we use $timeout
+        # $animate uses $$asyncCallback that uses requestAnimationFrame by default, but it doesn"t test well, so we use $timeout
         $provide.decorator "$$asyncCallback", ($delegate, $timeout) ->
           return (fn) -> $timeout(fn, 0, false)
       .controller "TestCtrl", ($scope, data) ->
@@ -16,22 +16,25 @@ describe "pathgather.popeye", ->
     angular.mock.module("test")
 
   describe "Popeye", ->
-    beforeEach inject (Popeye, $document, $rootScope, $templateCache, $q, $timeout, @$animate) ->
+    beforeEach inject (Popeye, $document, $rootScope, $templateCache, $q, $timeout, $animate) ->
       [@Popeye, @$document, @$rootScope, @$templateCache, @$q, @$timeout, @$animate] = arguments
-      spyOn(@$templateCache, 'get').and.callFake (filename) ->
+      spyOn(@$templateCache, "get").and.callFake (filename) ->
         return {
-          "modal_container.html": '<div class="pg-modal-container" pg-scroll-spy><div class="pg-modal"></div></div>',
-          "modal_template.html": '
-            <div class="scope-data" ng-bind="data"></div>
-            <div class="ctrl-data" ng-bind="ctrlData"></div>
-            <div class="ctrl-as-data" ng-bind="testCtrl.ctrlAsData"></div>
-          '
+          "modal_template.html": "
+            <div class='scope-data' ng-bind='data'></div>
+            <div class='ctrl-data' ng-bind='ctrlData'></div>
+            <div class='ctrl-as-data' ng-bind='testCtrl.ctrlAsData'></div>
+          "
           }[filename]
 
     describe "openModal", ->
       describe "with no options", ->
+        it "throws an error", ->
+          expect(=> @Popeye.openModal()).toThrowError(Error, /template/)
+
+      describe "with a templateUrl", ->
         beforeEach ->
-          @modal = @Popeye.openModal("modal_template.html")
+          @modal = @Popeye.openModal(templateUrl: "modal_template.html")
 
         it "returns an object that exposes useful things", ->
           # Before opening, all promises should be defined
@@ -50,16 +53,19 @@ describe "pathgather.popeye", ->
 
         it "loads the templates", ->
           @$rootScope.$digest()
-          expect(@$templateCache.get).toHaveBeenCalledWith("modal_container.html")
           expect(@$templateCache.get).toHaveBeenCalledWith("modal_template.html")
 
         it "appends the element to the body", ->
           @$rootScope.$digest()
           expect(@modal.element).toBeInDOM()
 
+        it "adds a class to the body indicating that the modal is open", ->
+          @$rootScope.$digest()
+          expect(angular.element("body").hasClass("modal-open")).toBe(true)
+
         it "appends the element to the body when body is empty", ->
           angular.element("body").empty()
-          @modal = @Popeye.openModal("modal_template.html")
+          @modal = @Popeye.openModal(templateUrl: "modal_template.html")
           @$rootScope.$digest()
           @$timeout.flush()
           expect(@modal.element).toBeInDOM()
@@ -96,11 +102,67 @@ describe "pathgather.popeye", ->
             @$timeout.flush()
             expect(@closed).toBe(false)
 
+      describe "with a template", ->
+        beforeEach ->
+          @data = "foo"
+          @modal = @Popeye.openModal(
+            template: "<div class='my-class'>This is my template</div>"
+          )
+
+        it "loads the template", ->
+          @$rootScope.$digest()
+          # Our test controller binds the 'data' resolve to a scope variable 'ctrlData'
+          expect(@modal.element.find(".my-class").text()).toEqual("This is my template")
+
+      describe "with a template and templateUrl", ->
+        beforeEach ->
+          @data = "foo"
+          @modal = @Popeye.openModal(
+            template: "<div class='my-class'>This is my template</div>"
+            templateUrl: "modal_template.html"
+          )
+
+        it "loads the template, not the templateUrl", ->
+          @$rootScope.$digest()
+          # Our test controller binds the 'data' resolve to a scope variable 'ctrlData'
+          expect(@modal.element.find(".my-class").text()).toEqual("This is my template")
+          expect(@modal.element.find(".scope-data").length).toEqual(0)
+
+      describe "with a containerTemplate", ->
+        beforeEach ->
+          @modal = @Popeye.openModal(
+            templateUrl: "modal_template.html"
+            containerTemplate: "<div class='pg-modal-container'><div class='my-header'></div><div class='pg-modal'></div></div>"
+          )
+
+        it "uses the provided container template", ->
+          @$rootScope.$digest()
+          expect(@modal.container.find(".my-header").length).toEqual(1)
+
+      describe "with a containerTemplateUrl", ->
+        beforeEach ->
+          @modal = @Popeye.openModal(
+            templateUrl: "modal_template.html"
+            containerTemplate: null
+            containerTemplateUrl: "my_modal_container.html"
+          )
+
+        it "requests the container template", inject ($httpBackend) ->
+          $httpBackend.expectGET("my_modal_container.html").respond(
+            "<div class='pg-modal-container'><div class='my-header'></div><div class='pg-modal'></div></div>"
+          )
+          @$rootScope.$digest()
+          $httpBackend.flush()
+          expect(@modal.container.find(".my-header").length).toEqual(1)
+          $httpBackend.verifyNoOutstandingExpectation()
+          $httpBackend.verifyNoOutstandingRequest()
+
       describe "with controller & resolves", ->
         beforeEach ->
           @data = "foo"
-          @modal = @Popeye.openModal("modal_template.html",
-            controller: 'TestCtrl'
+          @modal = @Popeye.openModal(
+            templateUrl: "modal_template.html"
+            controller: "TestCtrl"
             resolve: { data: => @data }
           )
 
@@ -116,13 +178,14 @@ describe "pathgather.popeye", ->
           # Our test controller binds the 'data' resolve to a scope variable 'ctrlData'
           expect(@modal.scope.ctrlData).toEqual(@data)
           expect(@modal.controller).toBeDefined()
-          expect(@modal.element.find('.ctrl-data').text()).toEqual(@data)
+          expect(@modal.element.find(".ctrl-data").text()).toEqual(@data)
 
       describe "with controllerAs & resolves", ->
         beforeEach ->
           @data = "foo"
-          @modal = @Popeye.openModal("modal_template.html",
-            controller: 'TestCtrl as testCtrl'
+          @modal = @Popeye.openModal(
+            templateUrl: "modal_template.html"
+            controller: "TestCtrl as testCtrl"
             resolve: { data: => @data }
           )
 
@@ -131,11 +194,14 @@ describe "pathgather.popeye", ->
           # Our test controller binds the 'data' resolve to a variable 'ctrlAsData'
           expect(@modal.controller).toBeDefined()
           expect(@modal.controller.ctrlAsData).toEqual(@data)
-          expect(@modal.element.find('.ctrl-as-data').text()).toEqual(@data)
+          expect(@modal.element.find(".ctrl-as-data").text()).toEqual(@data)
 
       describe "with windowClass", ->
         beforeEach ->
-          @modal = @Popeye.openModal("modal_template.html", windowClass: "pg-special-window")
+          @modal = @Popeye.openModal(
+            templateUrl: "modal_template.html"
+            windowClass: "pg-special-window"
+          )
 
         it "adds the class to the container element", ->
           @$rootScope.$digest()
@@ -144,8 +210,9 @@ describe "pathgather.popeye", ->
       describe "with locals", ->
         beforeEach ->
           @data = "foo"
-          @modal = @Popeye.openModal("modal_template.html",
-            controller: 'TestCtrl as testCtrl'
+          @modal = @Popeye.openModal(
+            templateUrl: "modal_template.html"
+            controller: "TestCtrl as testCtrl"
             locals: { data: @data }
           )
 
@@ -154,12 +221,13 @@ describe "pathgather.popeye", ->
           # Our test controller binds the 'data' local to a variable 'ctrlData'
           expect(@modal.controller).toBeDefined()
           expect(@modal.controller.ctrlAsData).toEqual(@data)
-          expect(@modal.element.find('.ctrl-as-data').text()).toEqual(@data)
+          expect(@modal.element.find(".ctrl-as-data").text()).toEqual(@data)
 
       describe "with scope", ->
         beforeEach ->
           @myScope = @$rootScope.$new()
-          @modal = @Popeye.openModal("modal_template.html",
+          @modal = @Popeye.openModal(
+            templateUrl: "modal_template.html"
             scope: @myScope
             controller: ($scope) ->
               $scope.data = "hello"
@@ -170,7 +238,7 @@ describe "pathgather.popeye", ->
           # Our test controller adds a new "data" property to the scope
           expect(@myScope.data).toBeDefined()
           expect(@myScope.data).toEqual("hello")
-          expect(@modal.element.find('.scope-data').text()).toEqual("hello")
+          expect(@modal.element.find(".scope-data").text()).toEqual("hello")
 
         it "doesn't destroy the scope on close", ->
           spyOn(@myScope, "$destroy")
@@ -183,19 +251,21 @@ describe "pathgather.popeye", ->
         beforeEach ->
           @myScope = @$rootScope.$new()
           @myScope.data = "hello"
-          @modal = @Popeye.openModal("modal_template.html",
+          @modal = @Popeye.openModal(
+            templateUrl: "modal_template.html"
             scope: @myScope
           )
 
         it "binds the provided scope to the template", ->
           @$rootScope.$digest()
-          expect(@modal.element.find('.scope-data').text()).toEqual("hello")
+          expect(@modal.element.find(".scope-data").text()).toEqual("hello")
 
       describe "when a resolve error occurs", ->
         beforeEach ->
           @data = "foo"
-          @modal = @Popeye.openModal("modal_template.html",
-            controller: 'TestCtrl'
+          @modal = @Popeye.openModal(
+            templateUrl: "modal_template.html"
+            controller: "TestCtrl"
             resolve: { data: => @$q.reject("Oh no!") }
           )
 
@@ -211,7 +281,7 @@ describe "pathgather.popeye", ->
 
       describe "when a modal is already active", ->
         beforeEach ->
-          @modal = @Popeye.openModal("modal_template.html")
+          @modal = @Popeye.openModal(templateUrl: "modal_template.html")
           opened = false
           @modal.opened.then -> opened = true
           @$rootScope.$digest()
@@ -221,7 +291,7 @@ describe "pathgather.popeye", ->
         it "closes the existing modal, then opens the next one", ->
           oldModalClosed = false
           @modal.closed.then -> oldModalClosed = true
-          newModal = @Popeye.openModal("modal_template.html")
+          newModal = @Popeye.openModal(templateUrl: "modal_template.html")
           newModalOpened = false
           newModal.opened.then -> newModalOpened = true
           expect(oldModalClosed).toBe(false)
@@ -233,9 +303,9 @@ describe "pathgather.popeye", ->
 
       describe "when opening multiple modals in series", ->
         it "opens them in calling order, after closing the previous first", ->
-          modal1 = @Popeye.openModal("modal_template.html", {id: "modal1"})
-          modal2 = @Popeye.openModal("modal_template.html", {id: "modal2"})
-          modal3 = @Popeye.openModal("modal_template.html", {id: "modal3"})
+          modal1 = @Popeye.openModal(templateUrl: "modal_template.html", id: "modal1")
+          modal2 = @Popeye.openModal(templateUrl: "modal_template.html", id: "modal2")
+          modal3 = @Popeye.openModal(templateUrl: "modal_template.html", id: "modal3")
           openedModal = "none"
           closedModal = "none"
           modal1.opened.then ->
@@ -267,13 +337,9 @@ describe "pathgather.popeye", ->
           expect(openedModal).toEqual("modal3")
           expect(closedModal).toEqual("modal2")
 
-    describe "loadInOwnState", ->
-      it "throws an error", ->
-        expect(-> @Popeye.loadInOwnState()).toThrow()
-
     describe "closeCurrentModal", ->
       beforeEach ->
-        @modal = @Popeye.openModal("modal_template.html")
+        @modal = @Popeye.openModal(templateUrl: "modal_template.html")
         @$rootScope.$digest()
         @$timeout.flush()
 
@@ -281,6 +347,13 @@ describe "pathgather.popeye", ->
         @Popeye.closeCurrentModal()
         @$rootScope.$digest()
         expect(@modal.element).not.toBeInDOM()
+
+      it "removes the class from the body indicating that the modal is open", ->
+        expect(angular.element("body").hasClass("modal-open")).toBe(true)
+        @Popeye.closeCurrentModal()
+        @$rootScope.$digest()
+        @$timeout.flush()
+        expect(angular.element("body").hasClass("modal-open")).toBe(false)
 
       it "resolves the modal's closed promise", ->
         @modal.closed.then (result) =>
