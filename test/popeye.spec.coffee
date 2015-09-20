@@ -4,11 +4,7 @@ describe "pathgather.popeye", ->
   beforeEach ->
     # Define a test app so we can make sure that we load things like controllers correctly
     testApp = angular
-      .module("test", ["pathgather.popeye"])
-      .config ($provide) ->
-        # $animate uses $$asyncCallback that uses requestAnimationFrame by default, but it doesn"t test well, so we use $timeout
-        $provide.decorator "$$asyncCallback", ($delegate, $timeout) ->
-          return (fn) -> $timeout(fn, 0, false)
+      .module("test", ["pathgather.popeye", "ngAnimateMock"])
       .controller "TestCtrl", ($scope, data) ->
         @ctrlAsData = data
         $scope.ctrlData = data
@@ -16,8 +12,8 @@ describe "pathgather.popeye", ->
     angular.mock.module("test")
 
   describe "Popeye", ->
-    beforeEach inject (Popeye, $document, $rootScope, $templateCache, $q, $timeout, $animate) ->
-      [@Popeye, @$document, @$rootScope, @$templateCache, @$q, @$timeout, @$animate] = arguments
+    beforeEach inject (Popeye, $document, $rootScope, $templateCache, $q, $animate) ->
+      [@Popeye, @$document, @$rootScope, @$templateCache, @$q, @$animate] = arguments
       spyOn(@$templateCache, "get").and.callFake (filename) ->
         return {
           "modal_template.html": "
@@ -46,46 +42,40 @@ describe "pathgather.popeye", ->
           expect(@modal.element).not.toBeDefined()
 
           # After opening, scope and elements should be defined too
-          @$rootScope.$digest()
+          @$animate.flush()
           expect(@modal.scope).toBeDefined()
           expect(@modal.container).toBeDefined()
           expect(@modal.element).toBeDefined()
 
-        it "loads the templates", ->
-          @$rootScope.$digest()
+        it "loads the template", ->
+          @$animate.flush()
           expect(@$templateCache.get).toHaveBeenCalledWith("modal_template.html")
 
         it "appends the element to the body", ->
-          @$rootScope.$digest()
+          @$animate.flush()
           expect(@modal.element).toBeInDOM()
 
         it "adds a class to the body indicating that the modal is open", ->
-          @$rootScope.$digest()
+          @$animate.flush()
           expect(angular.element("body").hasClass("modal-open")).toBe(true)
-
-        it "appends the element to the body when body is empty", ->
-          angular.element("body").empty()
-          @modal = @Popeye.openModal(templateUrl: "modal_template.html")
-          @$rootScope.$digest()
-          @$timeout.flush()
-          expect(@modal.element).toBeInDOM()
 
         it "resolves the modal's opened promise", ->
           opened = false
           @modal.opened.then -> opened = true
-          @$timeout.flush()
+          @$animate.flush()
           expect(opened).toBe(true)
 
         it "resolves the modal's closed promise with the close value", ->
+          @$animate.flush()
           @modal.closed.then (result) =>
             @closed_value = result
           @modal.close("hello")
-          @$timeout.flush()
+          @$animate.flush()
           expect(@closed_value).toBe("hello")
 
         describe "adds a click handler to the container that", ->
           beforeEach ->
-            @$rootScope.$digest()
+            @$animate.flush()
             @closed = false
             @modal.closed.then (result) =>
               @closed = true
@@ -93,14 +83,23 @@ describe "pathgather.popeye", ->
 
           it "closes modal when clicked on the container", ->
             @modal.container.trigger("click")
-            @$timeout.flush()
+            expect(@modal.closing).toBe(true)
+            @$animate.flush()
             expect(@closed).toBe(true)
             expect(@closed_value).toEqual(reason: "backdrop click")
 
           it "doesn't close modal when clicked on the modal body", ->
-            @modal.container.find(".popeye-modal").trigger("click")
-            @$timeout.flush()
+            @modal.element.trigger("click")
+            expect(@modal.closing).not.toBe(true)
+            @$rootScope.$digest()
             expect(@closed).toBe(false)
+
+      describe "when the body is empty", ->
+        it "appends the element to the body", ->
+          angular.element("body").empty()
+          @modal = @Popeye.openModal(templateUrl: "modal_template.html")
+          @$animate.flush()
+          expect(@modal.element).toBeInDOM()
 
       describe "with a template", ->
         beforeEach ->
@@ -254,8 +253,7 @@ describe "pathgather.popeye", ->
         it "doesn't destroy the scope on close", ->
           spyOn(@myScope, "$destroy")
           @modal.close()
-          @$rootScope.$digest()
-          @$timeout.flush()
+          @$animate.flush()
           expect(@myScope.$destroy).not.toHaveBeenCalled()
 
       describe "with scope but no controller", ->
@@ -295,8 +293,7 @@ describe "pathgather.popeye", ->
           @modal = @Popeye.openModal(templateUrl: "modal_template.html")
           opened = false
           @modal.opened.then -> opened = true
-          @$rootScope.$digest()
-          @$timeout.flush()
+          @$animate.flush()
           expect(opened).toBe(true)
 
         it "closes the existing modal, then opens the next one", ->
@@ -307,8 +304,7 @@ describe "pathgather.popeye", ->
           newModal.opened.then -> newModalOpened = true
           expect(oldModalClosed).toBe(false)
           expect(newModalOpened).toBe(false)
-          @$rootScope.$digest()
-          @$timeout.flush()
+          @$animate.flush() for [1..2] # NOTE: In angular + angular-mocks 1.3.19, this only needed to be called once
           expect(oldModalClosed).toBe(true)
           expect(newModalOpened).toBe(true)
 
@@ -343,16 +339,15 @@ describe "pathgather.popeye", ->
             expect(openedModal).toEqual("modal3")
             expect(closedModal).toEqual("modal2")
             closedModal = "modal3"
-          @$rootScope.$digest()
-          @$timeout.flush()
+
+          @$animate.flush() for [1..5] # NOTE: In angular + angular-mocks 1.3.19, this only needed to be called once
           expect(openedModal).toEqual("modal3")
           expect(closedModal).toEqual("modal2")
 
     describe "closeCurrentModal", ->
       beforeEach ->
         @modal = @Popeye.openModal(templateUrl: "modal_template.html")
-        @$rootScope.$digest()
-        @$timeout.flush()
+        @$animate.flush()
 
       it "removes the element from the body", ->
         @Popeye.closeCurrentModal()
@@ -362,8 +357,7 @@ describe "pathgather.popeye", ->
       it "removes the class from the body indicating that the modal is open", ->
         expect(angular.element("body").hasClass("modal-open")).toBe(true)
         @Popeye.closeCurrentModal()
-        @$rootScope.$digest()
-        @$timeout.flush()
+        @$animate.flush()
         expect(angular.element("body").hasClass("modal-open")).toBe(false)
 
       it "resolves the modal's closed promise", ->
@@ -371,13 +365,13 @@ describe "pathgather.popeye", ->
           @closed = true
           @closed_value = result
         @Popeye.closeCurrentModal("some reason")
-        @$timeout.flush()
+        @$animate.flush()
         expect(@closed).toBe(true)
         expect(@closed_value).toEqual(reason: "some reason")
 
       it "destroys the modal scope", ->
         @Popeye.closeCurrentModal()
-        @$timeout.flush()
+        @$animate.flush()
         expect(@modal.scope.$$destroyed).toBe(true)
 
       it "calls $animate.leave once", ->

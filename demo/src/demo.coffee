@@ -23,6 +23,8 @@ mod.controller "pgPopeyeDemoCtrl", (Popeye) ->
     )
     modal.closed.then => @balloons = false
 
+  return @
+
 mod.controller "pgPopeyeModalCtrl", (modal, Popeye) ->
   @close = ->
     modal.close()
