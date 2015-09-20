@@ -12,7 +12,13 @@ popeye = (angular) ->
       #   PopeyeProvider.defaults.containerClass = "my-modal-window";
       # });
       defaults:
-        containerTemplate: "<div class='popeye-modal-container'><div class='popeye-modal'></div></div>"
+        containerTemplate: """
+          <div class="popeye-modal-container">
+            <div class="popeye-modal">
+              <a class="popeye-close-modal" href ng-click="$close()"></a>
+            </div>
+          </div>
+        """
         containerTemplateUrl: null
         bodyClass: "modal-open"
         containerClass: null
@@ -116,7 +122,7 @@ popeye = (angular) ->
                     $q.reject("Missing containerTemplate or containerTemplateUrl")
 
                   templatePromise.then (tmpl) =>
-                    angular.element(containerElement[0].querySelector(".popeye-modal")).html(tmpl.data)
+                    angular.element(containerElement[0].querySelector(".popeye-modal")).append(tmpl.data)
                     containerElement.on "click", (evt) => @close() if evt.target == evt.currentTarget
                     @container = $compile(containerElement)(@scope)
                     @element = angular.element(@container[0].querySelector(".popeye-modal"))

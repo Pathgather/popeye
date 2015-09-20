@@ -31,7 +31,7 @@ body {
     width: 70%;
     margin: 0.5em auto; }
 
-#documentation p {
+#documentation p, #documentation pre {
   text-align: left; }
 
 #documentation .documentation {
@@ -64,10 +64,11 @@ span.comment {
   color: #586e75;
   font-weight: 100; }
 
-span.inline-code {
+.inline-code {
   background: #eee;
   font-family: monospace;
-  color: #4C93EA; }
+  color: #4C93EA;
+  padding: 0; }
 
 pre, code {
   display: block;
@@ -76,7 +77,7 @@ pre, code {
   color: #4C93EA;
   padding: 1em;
   border-radius: 3px;
-  margin: 0.5em; }
+  margin: 0.5em 0; }
   pre.example, code.example {
     text-align: left; }
 

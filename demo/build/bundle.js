@@ -32801,7 +32801,7 @@ module.exports = angular;
       var PopeyeProvider;
       return PopeyeProvider = {
         defaults: {
-          containerTemplate: "<div class='popeye-modal-container'><div class='popeye-modal'></div></div>",
+          containerTemplate: "<div class=\"popeye-modal-container\">\n  <div class=\"popeye-modal\">\n    <a class=\"popeye-close-modal\" href ng-click=\"$close()\"></a>\n  </div>\n</div>",
           containerTemplateUrl: null,
           bodyClass: "modal-open",
           containerClass: null,
@@ -32924,7 +32924,7 @@ module.exports = angular;
                       }) : $q.reject("Missing containerTemplate or containerTemplateUrl");
                       return templatePromise.then(function(tmpl) {
                         var body, bodyLastChild;
-                        angular.element(containerElement[0].querySelector(".popeye-modal")).html(tmpl.data);
+                        angular.element(containerElement[0].querySelector(".popeye-modal")).append(tmpl.data);
                         containerElement.on("click", function(evt) {
                           if (evt.target === evt.currentTarget) {
                             return _this.close();

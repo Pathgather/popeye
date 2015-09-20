@@ -57,3 +57,12 @@
     padding: 2em 1.5em 1.5em 1.5em;
     background: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.4); }
+    .popeye-modal-container .popeye-modal a.popeye-close-modal {
+      position: absolute;
+      top: 1em;
+      right: 1em;
+      font-weight: 100;
+      text-decoration: none;
+      color: inherit; }
+      .popeye-modal-container .popeye-modal a.popeye-close-modal::after {
+        content: "\d7"; }

@@ -115,11 +115,25 @@ mod.controller("myCtrl", function($scope, <span class="highlight">Popeye</span>)
     <h2>Step 4: Documentation</h2>
     <div id="openModal" class="documentation">
       <h3><span class="inline-code"><span class="highlight">Popeye</span>.openModal(options)</span></h3>
-      <p>Creates a new <span class="inline-code">PopeyeModal</span> with the given options and opens it. This will cause
-      any existing modals to close first before the new modal is resolved and then opened. If you've used ngRoute routes
-      or ui-router states, you should find these options familiar.</p>
+      <p>Creates a new <span class="inline-code">PopeyeModal</span> with the given
+      <span class="inline-code">options</span> and opens it. This will cause any existing modals to close first before
+      the new modal is resolved and then opened.</p>
       <p>Returns the new <span class="inline-code">PopeyeModal</span> instance, which you'll usually want to hold on to.</p>
-      <p>Options include:
+      <p>By default, <span class="highlight">Popeye</span> uses a <span class="inline-code">containerTemplate</span>
+      that looks like this: </p>
+      <pre>
+&lt;div class="popeye-modal-container"&gt;
+  &lt;div class="popeye-modal"&gt;
+    &lt;a class="popeye-close-modal" href ng-click="$close()"&gt;&lt;/a&gt;
+    &lt;-- your modal template is appended here --&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+      <p>The default styles in <span class="highlight">popeye.css</span> absolutely position the container to cover the
+      entire window, centers the modal within that container, and positions the close link in the top right. You can, of
+      course, override all of this with your own CSS, or change the <span class="inline-code">containerTemplate</span>
+      to your own template if you prefer.</p>
+      <p>There are lots of options for opening a modal. If you've used ngRoute routes or ui-router states, you should
+      find these options familiar:
       <table>
       <thead>
         <tr>
@@ -159,8 +173,11 @@ mod.controller("myCtrl", function($scope, <span class="highlight">Popeye</span>)
         <tr>
           <td><span class="inline-code">scope</span></td>
           <td>object</td>
-          <td><span class="inline-code">$scope</span> to use for the modal template. By default, a new scope is created
-            off of <span class="inline-code">$rootScope</span></td>
+          <td>
+            <span class="inline-code">$scope</span> to use for the modal template. By default, a new scope is created
+            off of <span class="inline-code">$rootScope</span>. For convenience, a
+            <span class="inline-code">$close()</span> function is added to the scope that can be used to close the modal
+          </td>
         </tr>
         <tr>
           <td><span class="inline-code">controller</span></td>
@@ -191,11 +208,8 @@ mod.controller("myCtrl", function($scope, <span class="highlight">Popeye</span>)
           <td><span class="inline-code">containerTemplate</span></td>
           <td>string</td>
           <td>
-            HTML template that will provide a container for the modal template. By default, this is:<br/>
-            <span class="inline-code">&lt;div class="popeye-modal-container"&gt;<br/>
-              &nbsp;&nbsp;&lt;div class="popeye-modal"&gt;&lt;/div&gt;<br/>
-              &lt;/div&gt;
-            </span><br/><br/>
+            HTML template that acts as a container for the modal template. The compiled template is appended to this
+            container. By default, this is:
             Note: if you override this, you must include a <span class="inline-code">.popeye-modal</span> element so that
             the code knows where to insert your modal template
           </td>
@@ -293,19 +307,31 @@ mod.controller("myCtrl", function($scope, <span class="highlight">Popeye</span>)
           <td><span class="inline-code">element</span></td>
           <td>object</td>
           <td>
-            The jqLite element of the compiled modal template
+            The jQuery/jqLite element of the compiled modal template
           </td>
         </tr>
         <tr>
           <td><span class="inline-code">container</span></td>
           <td>object</td>
           <td>
-            The jqLite element of the compiled modal container template
+            The jQuery/jqLite element of the compiled modal container template
           </td>
         </tr>
       </tbody>
       </table>
       </p>
+    </div>
+    <div id="PopeyeProvider" class="documentation">
+      <h3><span class="inline-code"><span class="highlight">PopeyeProvider</span></span></h3>
+      <p>The Angular provider for the <span class="highlight">Popeye</span> service. You can use this provider to
+      configure default options for your application by modifying the <span class="inline-code">defaults</span>
+      property like this:</p>
+      <pre>
+var myApp = angular.module("myApp", ["<span class="highlight">pathgather.popeye</span>"]);
+myApp.config(function(<span class="highlight">PopeyeProvider</span>) {
+  <span class="highlight">PopeyeProvider</span>.defaults.containerClass = "my-modal-window";
+});
+      </pre>
     </div>
   </div>
   <div pg-balloons="ctrl.balloons" ></div>

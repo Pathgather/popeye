@@ -68,5 +68,18 @@ $popeye-modal-anim-duration: 0.4s;
     padding: 2em 1.5em 1.5em 1.5em;
     background: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+
+    a.popeye-close-modal {
+      position: absolute;
+      top: 1em;
+      right: 1em;
+      font-weight: 100;
+      text-decoration: none;
+      color: inherit;
+
+      &::after {
+        content: "\d7";
+      }
+    }
   }
 }

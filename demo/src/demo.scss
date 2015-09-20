@@ -46,7 +46,7 @@ body {
 }
 
 #documentation {
-  p {
+  p, pre {
     text-align: left;
   }
 
@@ -88,10 +88,11 @@ span.comment {
   font-weight: 100;
 }
 
-span.inline-code {
+.inline-code {
   background: #eee;
   font-family: monospace;
   color: $pg-blue;
+  padding: 0;
 }
 
 pre, code {
@@ -101,7 +102,7 @@ pre, code {
   color: $pg-blue;
   padding: 1em;
   border-radius: 3px;
-  margin: 0.5em;
+  margin: 0.5em 0;
 
   &.example {
     text-align: left;
