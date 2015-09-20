@@ -73,26 +73,32 @@ describe "pathgather.popeye", ->
           @$animate.flush()
           expect(@closed_value).toBe("hello")
 
-        describe "adds a click handler to the container that", ->
+        describe "adds event handlers that", ->
           beforeEach ->
             @$animate.flush()
             @closed = false
             @modal.closed.then (result) =>
               @closed = true
-              @closed_value = result
 
-          it "closes modal when clicked on the container", ->
+          it "close modal when clicked on the container", ->
             @modal.container.trigger("click")
             expect(@modal.closing).toBe(true)
             @$animate.flush()
             expect(@closed).toBe(true)
-            expect(@closed_value).toEqual(reason: "backdrop click")
 
           it "doesn't close modal when clicked on the modal body", ->
             @modal.element.trigger("click")
             expect(@modal.closing).not.toBe(true)
             @$rootScope.$digest()
             expect(@closed).toBe(false)
+
+          it "close modal when ESC is pressed", ->
+            evt = jQuery.Event("keydown")
+            evt.which = 27
+            @$document.trigger(evt)
+            expect(@modal.closing).toBe(true)
+            @$animate.flush()
+            expect(@closed).toBe(true)
 
       describe "when the body is empty", ->
         it "appends the element to the body", ->
@@ -216,6 +222,20 @@ describe "pathgather.popeye", ->
         it "adds the class to the container element", ->
           @$rootScope.$digest()
           expect(@modal.element).toHaveClass("pg-special-modal")
+
+      describe "with keyboard false", ->
+        beforeEach ->
+          @modal = @Popeye.openModal(
+            templateUrl: "modal_template.html"
+            keyboard: false
+          )
+          @$animate.flush()
+
+        it "does not close modal when ESC is pressed", ->
+          evt = jQuery.Event("keydown")
+          evt.which = 27
+          @$document.trigger(evt)
+          expect(@modal.closing).not.toBe(true)
 
       describe "with locals", ->
         beforeEach ->
@@ -364,10 +384,10 @@ describe "pathgather.popeye", ->
         @modal.closed.then (result) =>
           @closed = true
           @closed_value = result
-        @Popeye.closeCurrentModal("some reason")
+        @Popeye.closeCurrentModal("some value")
         @$animate.flush()
         expect(@closed).toBe(true)
-        expect(@closed_value).toEqual(reason: "some reason")
+        expect(@closed_value).toEqual("some value")
 
       it "destroys the modal scope", ->
         @Popeye.closeCurrentModal()

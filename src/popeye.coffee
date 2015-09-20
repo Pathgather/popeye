@@ -21,6 +21,7 @@ popeye = (angular) ->
         resolve: null
         scope: null
         controller: null
+        keyboard: true
 
       $get: ($q, $animate, $rootScope, $document, $http, $templateCache, $compile, $controller, $injector) ->
 
@@ -29,12 +30,17 @@ popeye = (angular) ->
         currentModal = null
         pendingPromise = null
 
+        # Register a global keydown handler to detect ESC keypresses
+        $document.on "keydown", (evt) ->
+          if evt.which == 27 && currentModal? && currentModal.options.keyboard
+            currentModal.close(reason: "keyboard")
+
         # Our modal class, which is responsible for resolving it's controller dependencies, adding/removing itself from
         # the DOM, and co-operating with other instances to ensure only one modal is active at a time
         class PopeyeModal
           constructor: (options = {}) ->
             throw new Error("template or templateUrl must be provided") unless options.template? || options.templateUrl?
-            @options = angular.extend(PopeyeProvider.defaults, options) # TODO: does this change the defaults?
+            @options = angular.extend(angular.copy(PopeyeProvider.defaults), options)
 
             # Setup up our resolved, opened, and closed promises
             @resolvedDeferred = $q.defer()
@@ -50,11 +56,10 @@ popeye = (angular) ->
             return @resolved if @resolving
             @resolving = true
             $q.when({}).then =>
-              locals = angular.extend({}, @options.locals)
+              locals = angular.extend({ modal: @ }, @options.locals)
               resolve = angular.extend({}, @options.resolve)
               angular.forEach resolve, (value, key) ->
                 locals[key] = if angular.isString(value) then $injector.get(value) else $injector.invoke(value, null, locals)
-              locals["modal"] = @
               $q.all(locals)
             .then (resolved) =>
               @scope = if @options.scope? then @options.scope else $rootScope.$new()
@@ -112,8 +117,7 @@ popeye = (angular) ->
 
                   templatePromise.then (tmpl) =>
                     angular.element(containerElement[0].querySelector(".popeye-modal")).html(tmpl.data)
-                    containerElement.on "click", (evt) => @close(reason: "backdrop click") if evt.target == evt.currentTarget
-
+                    containerElement.on "click", (evt) => @close() if evt.target == evt.currentTarget
                     @container = $compile(containerElement)(@scope)
                     @element = angular.element(@container[0].querySelector(".popeye-modal"))
                     @element.addClass(@options.modalClass) if @options.modalClass
@@ -159,8 +163,8 @@ popeye = (angular) ->
             modal.open()
             return modal
 
-          closeCurrentModal: (reason) ->
-            currentModal?.close(reason: reason).then -> currentModal = null
+          closeCurrentModal: (value) ->
+            currentModal?.close(value)
             return currentModal
         }
     }

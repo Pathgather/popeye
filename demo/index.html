@@ -183,7 +183,8 @@ mod.controller("myCtrl", function($scope, <span class="highlight">Popeye</span>)
           <td>
             A map of dependencies which are injected into the controller. This is similar to
             <span class="inline-code">resolve</span> but each value is the dependency itself. This is more to just pass
-            in values that are directly injected to the controller.
+            in values that are directly injected to the controller. By default, a <span class="inline-code">modal</span>
+            local is injected to the controller for easy access to the modal instance itself
           </td>
         </tr>
         <tr>
@@ -211,8 +212,8 @@ mod.controller("myCtrl", function($scope, <span class="highlight">Popeye</span>)
       </p>
     </div>
     <div id="closeCurrentModal" class="documentation">
-      <h3><span class="inline-code"><span class="highlight">Popeye</span>.closeCurrentModal()</span></h3>
-      <p>Calls <span class="inline-code">close()</span> on the currently active
+      <h3><span class="inline-code"><span class="highlight">Popeye</span>.closeCurrentModal(value)</span></h3>
+      <p>Calls <span class="inline-code">close(value)</span> on the currently active
       <span class="inline-code">PopeyeModal</span> if there is one.</p>
       <p>Returns the current <span class="inline-code">PopeyeModal</span> instance (which is now closing)</p>
     </div>
@@ -233,10 +234,11 @@ mod.controller("myCtrl", function($scope, <span class="highlight">Popeye</span>)
       </thead>
       <tbody>
         <tr>
-          <td><span class="inline-code">close</span></td>
+          <td><span class="inline-code">close(value)</span></td>
           <td>function</td>
           <td>
-            Closes the modal and then resolves the <span class="inline-code">closed</span> promise
+            Closes the modal and then resolves the <span class="inline-code">closed</span> promise with the given
+            <span class="inline-code">value</span>
           </td>
         </tr>
         <tr>
@@ -260,7 +262,8 @@ mod.controller("myCtrl", function($scope, <span class="highlight">Popeye</span>)
           <td>object</td>
           <td>
             Promise that is resolved once the modal is removed from the DOM (note this does not resolve until after any
-            <span class="inline-code">$animate</span> animations are finished)
+            <span class="inline-code">$animate</span> animations are finished). The promise will resolve to the value
+            provided to <span class="inline-code">close(value)</span>, if given
           </td>
         </tr>
         <tr>

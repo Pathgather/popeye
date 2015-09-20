@@ -18,12 +18,20 @@
           locals: null,
           resolve: null,
           scope: null,
-          controller: null
+          controller: null,
+          keyboard: true
         },
         $get: ["$q", "$animate", "$rootScope", "$document", "$http", "$templateCache", "$compile", "$controller", "$injector", function($q, $animate, $rootScope, $document, $http, $templateCache, $compile, $controller, $injector) {
           var PopeyeModal, currentModal, pendingPromise;
           currentModal = null;
           pendingPromise = null;
+          $document.on("keydown", function(evt) {
+            if (evt.which === 27 && (currentModal != null) && currentModal.options.keyboard) {
+              return currentModal.close({
+                reason: "keyboard"
+              });
+            }
+          });
           PopeyeModal = (function() {
             function PopeyeModal(options) {
               if (options == null) {
@@ -36,7 +44,7 @@
               if (!((options.template != null) || (options.templateUrl != null))) {
                 throw new Error("template or templateUrl must be provided");
               }
-              this.options = angular.extend(PopeyeProvider.defaults, options);
+              this.options = angular.extend(angular.copy(PopeyeProvider.defaults), options);
               this.resolvedDeferred = $q.defer();
               this.resolved = this.resolvedDeferred.promise;
               this.openedDeferred = $q.defer();
@@ -53,12 +61,13 @@
               $q.when({}).then((function(_this) {
                 return function() {
                   var locals, resolve;
-                  locals = angular.extend({}, _this.options.locals);
+                  locals = angular.extend({
+                    modal: _this
+                  }, _this.options.locals);
                   resolve = angular.extend({}, _this.options.resolve);
                   angular.forEach(resolve, function(value, key) {
                     return locals[key] = angular.isString(value) ? $injector.get(value) : $injector.invoke(value, null, locals);
                   });
-                  locals["modal"] = _this;
                   return $q.all(locals);
                 };
               })(this)).then((function(_this) {
@@ -127,9 +136,7 @@
                         angular.element(containerElement[0].querySelector(".popeye-modal")).html(tmpl.data);
                         containerElement.on("click", function(evt) {
                           if (evt.target === evt.currentTarget) {
-                            return _this.close({
-                              reason: "backdrop click"
-                            });
+                            return _this.close();
                           }
                         });
                         _this.container = $compile(containerElement)(_this.scope);
@@ -204,13 +211,9 @@
               modal.open();
               return modal;
             },
-            closeCurrentModal: function(reason) {
+            closeCurrentModal: function(value) {
               if (currentModal != null) {
-                currentModal.close({
-                  reason: reason
-                }).then(function() {
-                  return currentModal = null;
-                });
+                currentModal.close(value);
               }
               return currentModal;
             }
