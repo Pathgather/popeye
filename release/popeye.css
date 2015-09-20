@@ -1,4 +1,4 @@
-.pg-modal-container {
+.popeye-modal-container {
   position: fixed;
   bottom: 0;
   left: 0;
@@ -7,55 +7,53 @@
   z-index: 5;
   overflow-y: auto;
   background-color: rgba(76, 147, 234, 0.7); }
-  .pg-modal-container.ng-enter {
+  .popeye-modal-container.ng-enter {
     background-color: rgba(255, 255, 255, 0);
-    -moz-transition: background-color 0.7s;
-    -o-transition: background-color 0.7s;
-    -webkit-transition: background-color 0.7s;
     transition: background-color 0.7s; }
-    .pg-modal-container.ng-enter .pg-modal {
-      transform: translateY(300%);
+    .popeye-modal-container.ng-enter .popeye-modal {
+      -webkit-transform: translate(-50%, 50%);
+          -ms-transform: translate(-50%, 50%);
+              transform: translate(-50%, 50%);
       opacity: 0;
-      -moz-transition: transform 0.4s, opacity 0.4s;
-      -o-transition: transform 0.4s, opacity 0.4s;
-      -webkit-transition: transform 0.4s, opacity 0.4s;
+      transition: -webkit-transform 0.4s, opacity 0.4s;
       transition: transform 0.4s, opacity 0.4s; }
-    .pg-modal-container.ng-enter.ng-enter-active {
+    .popeye-modal-container.ng-enter.ng-enter-active {
       background-color: rgba(76, 147, 234, 0.7); }
-      .pg-modal-container.ng-enter.ng-enter-active .pg-modal {
-        transform: translateY(0%);
+      .popeye-modal-container.ng-enter.ng-enter-active .popeye-modal {
+        -webkit-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
         opacity: 1; }
-  .pg-modal-container.ng-leave {
+  .popeye-modal-container.ng-leave {
     background-color: rgba(76, 147, 234, 0.7);
-    -moz-transition: background-color 0.7s;
-    -o-transition: background-color 0.7s;
-    -webkit-transition: background-color 0.7s;
     transition: background-color 0.7s; }
-    .pg-modal-container.ng-leave .pg-modal {
-      transform: translateY(0%);
+    .popeye-modal-container.ng-leave .popeye-modal {
+      -webkit-transform: translate(-50%, -50%);
+          -ms-transform: translate(-50%, -50%);
+              transform: translate(-50%, -50%);
       opacity: 1;
-      -moz-transition: transform 0.4s, opacity 0.4s;
-      -o-transition: transform 0.4s, opacity 0.4s;
-      -webkit-transition: transform 0.4s, opacity 0.4s;
+      transition: -webkit-transform 0.4s, opacity 0.4s;
       transition: transform 0.4s, opacity 0.4s; }
-    .pg-modal-container.ng-leave.ng-leave-active {
+    .popeye-modal-container.ng-leave.ng-leave-active {
       background-color: rgba(255, 255, 255, 0); }
-      .pg-modal-container.ng-leave.ng-leave-active .pg-modal {
-        transform: translateY(300%);
+      .popeye-modal-container.ng-leave.ng-leave-active .popeye-modal {
+        -webkit-transform: translate(-50%, 50%);
+            -ms-transform: translate(-50%, 50%);
+                transform: translate(-50%, 50%);
         opacity: 0; }
-  .pg-modal-container .pg-modal {
-    position: relative;
+  .popeye-modal-container .popeye-modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    width: 40%;
     display: block;
-    visibility: visible;
     width: 60%;
-    margin: 30px auto 0 auto;
     border-radius: 3px;
     border: none;
     z-index: 6;
     padding: 2em 1.5em 1.5em 1.5em;
     background: white;
-    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
-    -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
-    -ms-box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
-    -o-box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.4); }

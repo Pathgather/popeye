@@ -98,7 +98,7 @@ describe "pathgather.popeye", ->
             expect(@closed_value).toEqual(reason: "backdrop click")
 
           it "doesn't close modal when clicked on the modal body", ->
-            @modal.container.find(".pg-modal").trigger("click")
+            @modal.container.find(".popeye-modal").trigger("click")
             @$timeout.flush()
             expect(@closed).toBe(false)
 
@@ -132,7 +132,7 @@ describe "pathgather.popeye", ->
         beforeEach ->
           @modal = @Popeye.openModal(
             templateUrl: "modal_template.html"
-            containerTemplate: "<div class='pg-modal-container'><div class='my-header'></div><div class='pg-modal'></div></div>"
+            containerTemplate: "<div class='popeye-modal-container'><div class='my-header'></div><div class='popeye-modal'></div></div>"
           )
 
         it "uses the provided container template", ->
@@ -149,7 +149,7 @@ describe "pathgather.popeye", ->
 
         it "requests the container template", inject ($httpBackend) ->
           $httpBackend.expectGET("my_modal_container.html").respond(
-            "<div class='pg-modal-container'><div class='my-header'></div><div class='pg-modal'></div></div>"
+            "<div class='popeye-modal-container'><div class='my-header'></div><div class='popeye-modal'></div></div>"
           )
           @$rootScope.$digest()
           $httpBackend.flush()
@@ -196,16 +196,27 @@ describe "pathgather.popeye", ->
           expect(@modal.controller.ctrlAsData).toEqual(@data)
           expect(@modal.element.find(".ctrl-as-data").text()).toEqual(@data)
 
-      describe "with windowClass", ->
+      describe "with containerClass", ->
         beforeEach ->
           @modal = @Popeye.openModal(
             templateUrl: "modal_template.html"
-            windowClass: "pg-special-window"
+            containerClass: "pg-special-container"
           )
 
         it "adds the class to the container element", ->
           @$rootScope.$digest()
-          expect(@modal.container).toHaveClass("pg-special-window")
+          expect(@modal.container).toHaveClass("pg-special-container")
+
+      describe "with modalClass", ->
+        beforeEach ->
+          @modal = @Popeye.openModal(
+            templateUrl: "modal_template.html"
+            modalClass: "pg-special-modal"
+          )
+
+        it "adds the class to the container element", ->
+          @$rootScope.$digest()
+          expect(@modal.element).toHaveClass("pg-special-modal")
 
       describe "with locals", ->
         beforeEach ->

@@ -10,10 +10,11 @@
       var PopeyeProvider;
       return PopeyeProvider = {
         defaults: {
-          containerTemplate: "<div class='pg-modal-container'><div class='pg-modal'></div></div>",
+          containerTemplate: "<div class='popeye-modal-container'><div class='popeye-modal'></div></div>",
           containerTemplateUrl: null,
           bodyClass: "modal-open",
-          windowClass: null,
+          containerClass: null,
+          modalClass: null,
           locals: null,
           resolve: null,
           scope: null,
@@ -113,8 +114,8 @@
                     return containerPromise.then(function(containerTmpl) {
                       var containerElement, templatePromise;
                       containerElement = angular.element(containerTmpl.data);
-                      if (_this.options.windowClass) {
-                        containerElement.addClass(_this.options.windowClass);
+                      if (_this.options.containerClass) {
+                        containerElement.addClass(_this.options.containerClass);
                       }
                       templatePromise = _this.options.template != null ? $q.when({
                         data: _this.options.template
@@ -123,7 +124,7 @@
                       }) : $q.reject("Missing containerTemplate or containerTemplateUrl");
                       return templatePromise.then(function(tmpl) {
                         var body, bodyLastChild;
-                        angular.element(containerElement[0].querySelector(".pg-modal")).html(tmpl.data);
+                        angular.element(containerElement[0].querySelector(".popeye-modal")).html(tmpl.data);
                         containerElement.on("click", function(evt) {
                           if (evt.target === evt.currentTarget) {
                             return _this.close({
@@ -132,12 +133,17 @@
                           }
                         });
                         _this.container = $compile(containerElement)(_this.scope);
-                        _this.element = angular.element(_this.container[0].querySelector(".pg-modal"));
+                        _this.element = angular.element(_this.container[0].querySelector(".popeye-modal"));
+                        if (_this.options.modalClass) {
+                          _this.element.addClass(_this.options.modalClass);
+                        }
                         body = $document.find("body");
                         if (body[0].lastChild) {
                           bodyLastChild = angular.element(body[0].lastChild);
                         }
-                        body.addClass(_this.options.bodyClass);
+                        if (_this.options.bodyClass) {
+                          body.addClass(_this.options.bodyClass);
+                        }
                         return $animate.enter(_this.container, body, bodyLastChild).then(function() {
                           currentModal = _this;
                           return _this.openedDeferred.resolve(_this);

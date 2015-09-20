@@ -9,13 +9,14 @@ popeye = (angular) ->
       #
       # testApp = angular.module("test", ["pathgather.popeye"]);
       # testApp.config(function(PopeyeProvider) {
-      #   PopeyeProvider.defaults.windowClass = "my-modal-window";
+      #   PopeyeProvider.defaults.containerClass = "my-modal-window";
       # });
       defaults:
-        containerTemplate: "<div class='pg-modal-container'><div class='pg-modal'></div></div>"
+        containerTemplate: "<div class='popeye-modal-container'><div class='popeye-modal'></div></div>"
         containerTemplateUrl: null
         bodyClass: "modal-open"
-        windowClass: null # TODO: rename to containerClass, add modalClass
+        containerClass: null
+        modalClass: null
         locals: null
         resolve: null
         scope: null
@@ -33,7 +34,7 @@ popeye = (angular) ->
         class PopeyeModal
           constructor: (options = {}) ->
             throw new Error("template or templateUrl must be provided") unless options.template? || options.templateUrl?
-            @options = angular.extend(PopeyeProvider.defaults, options)
+            @options = angular.extend(PopeyeProvider.defaults, options) # TODO: does this change the defaults?
 
             # Setup up our resolved, opened, and closed promises
             @resolvedDeferred = $q.defer()
@@ -99,7 +100,7 @@ popeye = (angular) ->
                 containerPromise.then (containerTmpl) =>
                   # Configure the modal container
                   containerElement = angular.element(containerTmpl.data)
-                  containerElement.addClass(@options.windowClass) if @options.windowClass
+                  containerElement.addClass(@options.containerClass) if @options.containerClass
 
                   # Construct a promise to fetch the modal template
                   templatePromise = if @options.template?
@@ -110,16 +111,17 @@ popeye = (angular) ->
                     $q.reject("Missing containerTemplate or containerTemplateUrl")
 
                   templatePromise.then (tmpl) =>
-                    angular.element(containerElement[0].querySelector(".pg-modal")).html(tmpl.data)
+                    angular.element(containerElement[0].querySelector(".popeye-modal")).html(tmpl.data)
                     containerElement.on "click", (evt) => @close(reason: "backdrop click") if evt.target == evt.currentTarget
 
                     @container = $compile(containerElement)(@scope)
-                    @element = angular.element(@container[0].querySelector(".pg-modal"))
+                    @element = angular.element(@container[0].querySelector(".popeye-modal"))
+                    @element.addClass(@options.modalClass) if @options.modalClass
 
                     # Add the container to the body
                     body = $document.find("body")
                     bodyLastChild = angular.element(body[0].lastChild) if body[0].lastChild
-                    body.addClass(@options.bodyClass)
+                    body.addClass(@options.bodyClass) if @options.bodyClass
 
                     $animate.enter(@container, body, bodyLastChild).then =>
                       currentModal = @

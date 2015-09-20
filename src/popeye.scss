@@ -4,7 +4,7 @@ $transparent: rgba(255, 255, 255, 0);
 $popeye-container-anim-duration: 0.7s;
 $popeye-modal-anim-duration: 0.4s;
 
-.pg-modal-container {
+.popeye-modal-container {
   position: fixed;
   bottom: 0;
   left: 0;
@@ -16,25 +16,19 @@ $popeye-modal-anim-duration: 0.4s;
 
   &.ng-enter {
     background-color: $transparent;
-    -moz-transition: background-color $popeye-container-anim-duration;
-    -o-transition: background-color $popeye-container-anim-duration;
-    -webkit-transition: background-color $popeye-container-anim-duration;
     transition: background-color $popeye-container-anim-duration;
 
-    .pg-modal {
-      transform: translateY(300%);
+    .popeye-modal {
+      transform: translate(-50%, 50%);
       opacity: 0;
-      -moz-transition: transform $popeye-modal-anim-duration, opacity $popeye-modal-anim-duration;
-      -o-transition: transform $popeye-modal-anim-duration, opacity $popeye-modal-anim-duration;
-      -webkit-transition: transform $popeye-modal-anim-duration, opacity $popeye-modal-anim-duration;
       transition: transform $popeye-modal-anim-duration, opacity $popeye-modal-anim-duration;
     }
 
     &.ng-enter-active {
       background-color: $popeye-bg;
 
-      .pg-modal {
-        transform: translateY(0%);
+      .popeye-modal {
+        transform: translate(-50%, -50%);
         opacity: 1;
       }
     }
@@ -42,45 +36,37 @@ $popeye-modal-anim-duration: 0.4s;
 
   &.ng-leave {
     background-color: $popeye-bg;
-    -moz-transition: background-color $popeye-container-anim-duration;
-    -o-transition: background-color $popeye-container-anim-duration;
-    -webkit-transition: background-color $popeye-container-anim-duration;
     transition: background-color $popeye-container-anim-duration;
 
-    .pg-modal {
-      transform: translateY(0%);
+    .popeye-modal {
+      transform: translate(-50%, -50%);
       opacity: 1;
-      -moz-transition: transform $popeye-modal-anim-duration, opacity $popeye-modal-anim-duration;
-      -o-transition: transform $popeye-modal-anim-duration, opacity $popeye-modal-anim-duration;
-      -webkit-transition: transform $popeye-modal-anim-duration, opacity $popeye-modal-anim-duration;
       transition: transform $popeye-modal-anim-duration, opacity $popeye-modal-anim-duration;
     }
 
     &.ng-leave-active {
       background-color: $transparent;
 
-      .pg-modal {
-        transform: translateY(300%);
+      .popeye-modal {
+        transform: translate(-50%, 50%);
         opacity: 0;
       }
     }
   }
 
-  .pg-modal {
-    position: relative;
+  .popeye-modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40%;
     display: block;
-    visibility: visible;
     width: 60%;
-    margin: 30px auto 0 auto;
     border-radius: 3px;
     border: none;
     z-index: 6;
     padding: 2em 1.5em 1.5em 1.5em;
     background: white;
-    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
-    -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
-    -ms-box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
-    -o-box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
   }
 }
