@@ -133,6 +133,7 @@ table {
     margin: 0.5em auto; }
 
 .pg-balloons {
+  pointer-events: none;
   position: absolute;
   top: 0;
   left: 0;
