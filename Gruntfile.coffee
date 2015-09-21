@@ -52,5 +52,5 @@ module.exports = (grunt) ->
         tasks: ['sass:demo', 'postcss:demo']
 
   grunt.registerTask 'demo', ['clean', 'browserify:demo', 'sass:demo', 'postcss:demo', 'copy:demo']
-  grunt.registerTask 'watch', ['demo', 'watch']
+  grunt.registerTask 'demo:watch', ['demo', 'watch']
   grunt.registerTask 'default', ['demo']

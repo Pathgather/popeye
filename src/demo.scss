@@ -4,12 +4,13 @@ $swing-angle: 2deg;
 
 body {
   font-size: 16px;
+  text-size-adjust: 100%;
   font-family: 'Open Sans', sans-serif;
   color: #666;
   line-height: 1.2;
 
   &.modal-open {
-    overflow-y: hidden;
+    overflow: hidden;
   }
 }
 
@@ -28,7 +29,6 @@ body {
 }
 
 .step {
-  width: 80%;
   max-width: 800px;
   margin: 5em auto;
   padding: 2em 0.5em;
@@ -103,6 +103,7 @@ pre, code {
   padding: 1em;
   border-radius: 3px;
   margin: 0.5em 0;
+  overflow: scroll;
 
   &.example {
     text-align: left;
@@ -140,7 +141,7 @@ table {
   }
 
   td, th {
-    padding: 0.5em 1em;
+    padding: 0.5em;
   }
 }
 
