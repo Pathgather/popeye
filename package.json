@@ -2,6 +2,9 @@
   "name": "angular-popeye",
   "version": "0.0.5",
   "description": "A simple modal library for AngularJS applications",
+  "files": [
+    "release/"
+  ],
   "main": "release/popeye.js",
   "scripts": {
     "test": "grunt release"

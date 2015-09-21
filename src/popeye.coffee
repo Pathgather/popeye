@@ -69,7 +69,7 @@ popeye = (angular) ->
               $q.all(locals)
             .then (resolved) =>
               @scope = if @options.scope? then @options.scope else $rootScope.$new()
-              @scope.$close = => @close(arguments...) # Backwards compatability with the Foundation modal # TODO: remove?
+              @scope.$close = => @close(arguments...) # Add $close() to the scope, for convenience
               if @options.controller
                 @controller = $controller(@options.controller, angular.extend({$scope: @scope}, resolved))
               @resolvedDeferred.resolve(@)

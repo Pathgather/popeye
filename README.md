@@ -5,4 +5,7 @@
 ![devDependencies](https://img.shields.io/david/dev/Pathgather/angular-popeye.svg)
 
 # Popeye
-A simple modal library for AngularJS applications
+A simple modal library for AngularJS applications.
+
+## Documentation
+See the [demo page](http://pathgather.github.io/popeye/) for installation instructions, usage, and documentation.
