@@ -1,0 +1,266 @@
+$pg-blue: #4C93EA;
+$pg-orange: #F67B45;
+$swing-angle: 2deg;
+
+body {
+  font-size: 16px;
+  font-family: 'Open Sans', sans-serif;
+  color: #666;
+  line-height: 1.2;
+
+  &.modal-open {
+    overflow-y: hidden;
+  }
+}
+
+.gh-ribbon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 0;
+}
+
+.pg-logo {
+  position: absolute;
+  top: 1em;
+  left: 1em;
+  border: 0;
+}
+
+.step {
+  width: 80%;
+  max-width: 800px;
+  margin: 5em auto;
+  padding: 2em 0.5em;
+  text-align: center;
+
+  svg.pg-balloon-logo {
+    fill: #4c93ea;
+    height: 6em;
+  }
+
+  &.title p {
+    width: 70%;
+    margin: 0.5em auto;
+  }
+}
+
+#documentation {
+  p, pre {
+    text-align: left;
+  }
+
+  .documentation {
+    margin-bottom: 4em;
+  }
+}
+
+h1 {
+  font-size: 4em;
+  font-weight: 100;
+  color: $pg-blue;
+  margin-bottom: 0.5em;
+}
+
+h2 {
+  font-size: 2em;
+  font-weight: 100;
+  margin-bottom: 0.5em;
+}
+
+h3 {
+  font-size: 1.5em;
+  font-weight: 100;
+  margin-bottom: 0.5em;
+}
+
+p {
+  margin-bottom: 0.5em;
+}
+
+span.highlight {
+  color: $pg-orange;
+  font-weight: 400;
+}
+
+span.comment {
+  color: #586e75;
+  font-weight: 100;
+}
+
+.inline-code {
+  background: #eee;
+  font-family: monospace;
+  color: $pg-blue;
+  padding: 0;
+}
+
+pre, code {
+  display: block;
+  font-family: monospace;
+  background: #eee;
+  color: $pg-blue;
+  padding: 1em;
+  border-radius: 3px;
+  margin: 0.5em 0;
+
+  &.example {
+    text-align: left;
+  }
+}
+
+a.button {
+  font-size: 1.5em;
+  color: #fff;
+  background: $pg-blue;
+  border: 1px solid #aaa;
+  border-radius: 3px;
+  padding: 0.5em 1.4em;
+  margin-top: 1em;
+  display: inline-block;
+  text-decoration: none;
+}
+
+table {
+  text-align: left;
+  background: #eee;
+  border-radius: 3px;
+  width: 100%;
+
+  thead {
+    font-weight: 600;
+  }
+
+  tr {
+    border-bottom: 1px solid #aaa;
+  }
+
+  td + td, th + th {
+    border-left: 1px solid #aaa;
+  }
+
+  td, th {
+    padding: 0.5em 1em;
+  }
+}
+
+.popeye-modal-container.demo-container {
+  .popeye-modal.demo-modal {
+    width: 50%;
+    min-width: 400px;
+    min-height: 400px;
+    text-align: center;
+
+    h2 {
+      margin: 1em;
+    }
+
+    img {
+      height: 200px;
+      margin-bottom: 1em;
+    }
+
+    .close-button {
+      margin: 0.5em auto;
+    }
+  }
+}
+
+.pg-balloon-container {
+  pointer-events: none;
+  z-index: 10;
+  position: absolute;
+  top: 5px;
+  height: 100%;
+
+  &.ng-enter {
+    transition: transform 3s ease-out;
+    transform: translateY(100%);
+
+    &.ng-enter-active {
+      transform: translateY(0%);
+    }
+  }
+
+  &.ng-leave {
+    transition: transform 6s ease-in;
+    transform: translateY(0%);
+
+    &.ng-leave-active {
+      transform: translateY(-200%);
+    }
+  }
+
+  .pg-balloon {
+    background: $pg-blue;
+    height: 80px;
+    width: 70px;
+    border-radius: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    animation: swing 4s infinite;
+    animation-timing-function: cubic-bezier(0.5, 0, 0.2, 1);
+
+    &::before, &::after {
+      content: " ";
+      display: inline-block;
+      position: absolute;
+      border-radius: 100%;
+    }
+
+    &::before {
+      background: rgba(255, 255, 255, 0.7);
+      width: 40px;
+      height: 40px;
+      top: 10px;
+      left: 12px;
+    }
+
+    &::after {
+      background: $pg-blue;
+      width: 48px;
+      height: 48px;
+      top: 11px;
+      left: 13px;
+    }
+
+    .pg-balloon-knot {
+      position: relative;
+      top: 76px;
+      left: 32px;
+      width: 8px;
+      height: 8px;
+      border-radius: 100%;
+      background: $pg-blue;
+
+      .pg-balloon-tail {
+        position: relative;
+        top: 25px;
+        width: 2px;
+        height: 24px;
+        background-color: black;
+        border-bottom: 1px solid black;
+        transform-origin: top center;
+        animation: swing 4s infinite;
+        animation-timing-function: cubic-bezier(0.5, 0, 0.2, 1);
+      }
+    }
+
+    .pg-balloon-knot>.pg-balloon-tail {
+      top: 8px;
+      left: 3px;
+    }
+  }
+}
+
+@keyframes swing {
+  0% {
+    transform: rotate($swing-angle);
+  }
+  50% {
+    transform: rotate(-$swing-angle);
+  }
+  100% {
+    transform: rotate($swing-angle);
+  }
+}
+
