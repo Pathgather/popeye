@@ -230,38 +230,33 @@ mod.controller("myCtrl", function($scope, <span class="highlight">Popeye</span>)
       <thead>
         <tr>
           <th>Property</th>
-          <th>Type</th>
           <th>Details</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td><span class="inline-code">close(value)</span></td>
-          <td>function</td>
+          <td><span class="inline-code">close(value)</span><br/>(function)</td>
           <td>
             Closes the modal and then resolves the <span class="inline-code">closed</span> promise with the given
             <span class="inline-code">value</span>
           </td>
         </tr>
         <tr>
-          <td><span class="inline-code">open</span></td>
-          <td>function</td>
+          <td><span class="inline-code">open</span><br/>(function)</td>
           <td>
             Opens the modal, after resolving any <span class="inline-code">resolve</span> dependencies first. You
             typically won't call this directly
           </td>
         </tr>
         <tr>
-          <td><span class="inline-code">resolve</span></td>
-          <td>function</td>
+          <td><span class="inline-code">resolve</span><br/>(function)</td>
           <td>
             Resolves the modal's <span class="inline-code">resolve</span> dependencies. You typically won't call this
             directly
           </td>
         </tr>
         <tr>
-          <td><span class="inline-code">closed</span></td>
-          <td>object</td>
+          <td><span class="inline-code">closed</span><br/>(object)</td>
           <td>
             Promise that is resolved once the modal is removed from the DOM (note this does not resolve until after any
             <span class="inline-code">$animate</span> animations are finished). The promise will resolve to the value
@@ -269,38 +264,33 @@ mod.controller("myCtrl", function($scope, <span class="highlight">Popeye</span>)
           </td>
         </tr>
         <tr>
-          <td><span class="inline-code">opened</span></td>
-          <td>object</td>
+          <td><span class="inline-code">opened</span><br/>(object)</td>
           <td>
             Promise that is resolved once the modal is compiled and added to the DOM (note this does not resolve until
             after any <span class="inline-code">$animate</span> animations are finished)
           </td>
         </tr>
         <tr>
-          <td><span class="inline-code">resolved</span></td>
-          <td>object</td>
+          <td><span class="inline-code">resolved</span><br/>(object)</td>
           <td>
             Promise that is resolved once all the modal's <span class="inline-code">resolve</span> dependencies are
             resolved
           </td>
         </tr>
         <tr>
-          <td><span class="inline-code">options</span></td>
-          <td>object</td>
+          <td><span class="inline-code">options</span><br/>(object)</td>
           <td>
             The options that were used for this instance
           </td>
         </tr>
         <tr>
-          <td><span class="inline-code">element</span></td>
-          <td>object</td>
+          <td><span class="inline-code">element</span><br/>(object)</td>
           <td>
             The jQuery/jqLite element of the compiled modal template
           </td>
         </tr>
         <tr>
-          <td><span class="inline-code">container</span></td>
-          <td>object</td>
+          <td><span class="inline-code">container</span><br/>(object)</td>
           <td>
             The jQuery/jqLite element of the compiled modal container template
           </td>
