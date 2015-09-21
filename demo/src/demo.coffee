@@ -1,7 +1,7 @@
 angular = require "angular"
 ngAnimate = require "angular-animate"
 popeye = require "../../release/popeye"
-mod = angular.module "pgPopeyeDemoApp", [popeye, "ngAnimate"]
+mod = angular.module "pgPopeyeDemoApp", [popeye, ngAnimate]
 
 mod.config (PopeyeProvider) ->
   PopeyeProvider.defaults.containerClass = "demo-container"
@@ -15,7 +15,7 @@ mod.controller "pgPopeyeDemoCtrl", (Popeye) ->
     modal = Popeye.openModal(
       template: """
         <h2>Hello, Popeye!</h2>
-        <img src="littleguys_1.png" />
+        <img src="img/littleguys_1.png" />
         <p>Popeye doesn't try to do anything fancy; it compiles your template and appends it to the body.</p>
         <a href="#" class="button close-button" ng-click="modalCtrl.again()">Again!</a>
       """
@@ -33,7 +33,7 @@ mod.controller "pgPopeyeModalCtrl", (modal, Popeye) ->
     Popeye.openModal(
       template: """
         <h2>No-Mess Modals!</h2>
-        <img src="littleguys_2.png" />
+        <img src="img/littleguys_2.png" />
         <p>Popeye makes sure only one modal is active. No modal stack, no dependencies, no mess. Let's check it out!</p>
         <a href="#" class="button close-button" ng-click="modalCtrl.close()">Close</a>
       """

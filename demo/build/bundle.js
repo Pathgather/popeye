@@ -7,7 +7,7 @@ ngAnimate = require("angular-animate");
 
 popeye = require("../../release/popeye");
 
-mod = angular.module("pgPopeyeDemoApp", [popeye, "ngAnimate"]);
+mod = angular.module("pgPopeyeDemoApp", [popeye, ngAnimate]);
 
 mod.config(function(PopeyeProvider) {
   PopeyeProvider.defaults.containerClass = "demo-container";
@@ -21,7 +21,7 @@ mod.controller("pgPopeyeDemoCtrl", function(Popeye) {
       var modal;
       _this.balloons = true;
       modal = Popeye.openModal({
-        template: "<h2>Hello, Popeye!</h2>\n<img src=\"littleguys_1.png\" />\n<p>Popeye doesn't try to do anything fancy; it compiles your template and appends it to the body.</p>\n<a href=\"#\" class=\"button close-button\" ng-click=\"modalCtrl.again()\">Again!</a>",
+        template: "<h2>Hello, Popeye!</h2>\n<img src=\"img/littleguys_1.png\" />\n<p>Popeye doesn't try to do anything fancy; it compiles your template and appends it to the body.</p>\n<a href=\"#\" class=\"button close-button\" ng-click=\"modalCtrl.again()\">Again!</a>",
         controller: "pgPopeyeModalCtrl as modalCtrl"
       });
       return modal.closed.then(function() {
@@ -38,7 +38,7 @@ mod.controller("pgPopeyeModalCtrl", function(modal, Popeye) {
   };
   this.again = function() {
     return Popeye.openModal({
-      template: "<h2>No-Mess Modals!</h2>\n<img src=\"littleguys_2.png\" />\n<p>Popeye makes sure only one modal is active. No modal stack, no dependencies, no mess. Let's check it out!</p>\n<a href=\"#\" class=\"button close-button\" ng-click=\"modalCtrl.close()\">Close</a>",
+      template: "<h2>No-Mess Modals!</h2>\n<img src=\"img/littleguys_2.png\" />\n<p>Popeye makes sure only one modal is active. No modal stack, no dependencies, no mess. Let's check it out!</p>\n<a href=\"#\" class=\"button close-button\" ng-click=\"modalCtrl.close()\">Close</a>",
       controller: "pgPopeyeModalCtrl as modalCtrl"
     });
   };
@@ -32797,7 +32797,7 @@ module.exports = angular;
 * @copyright Pathgather 2015
 * @license MIT
 * @link https://github.com/Pathgather/popeye
-* @version 0.0.6
+* @version 0.0.7
 */
 
 (function() {
