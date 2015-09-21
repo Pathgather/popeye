@@ -1,3 +1,14 @@
+/**
+* angular-popeye
+* A simple modal library for AngularJS applications
+
+* @author Pathgather <tech@pathgather.com>
+* @copyright Pathgather 2015
+* @license MIT
+* @link https://github.com/Pathgather/popeye
+* @version 0.0.6
+*/
+
 (function() {
   var angular, popeye,
     bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };

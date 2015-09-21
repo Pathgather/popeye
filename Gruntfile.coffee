@@ -4,6 +4,26 @@ module.exports = (grunt) ->
   require('load-grunt-tasks')(grunt)
 
   grunt.initConfig
+    pkg: grunt.file.readJSON 'package.json'
+
+    # usebanner: add a banner to all release files
+    usebanner:
+      options:
+        position: 'top'
+        banner: """
+          /**
+          * <%= pkg.name %>
+          * <%= pkg.description %>\n
+          * @author <%= pkg.author.name %> <<%= pkg.author.email %>>
+          * @copyright <%= pkg.author.name %> <%= grunt.template.today('yyyy') %>
+          * @license <%= pkg.license %>
+          * @link <%= pkg.homepage %>
+          * @version <%= pkg.version %>
+          */\n
+        """
+      files:
+        src: 'release/*'
+
     # clean - Delete all build artifacts
     clean: ['.tmp', 'release', 'demo/build']
 
@@ -101,6 +121,6 @@ module.exports = (grunt) ->
   grunt.registerTask 'test', ['karma:unit']
   grunt.registerTask 'js:release', ['coffee:release', 'ngAnnotate:release', 'uglify:release']
   grunt.registerTask 'css:release', ['sass:release', 'postcss:release', 'postcss:min']
-  grunt.registerTask 'release', ['clean', 'karma:release', 'js:release', 'css:release']
+  grunt.registerTask 'release', ['clean', 'karma:release', 'js:release', 'css:release', 'usebanner']
   grunt.registerTask 'demo', ['release', 'browserify:demo', 'sass:demo', 'postcss:demo', 'watch']
   grunt.registerTask 'default', ['release']

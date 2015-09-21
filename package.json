@@ -1,6 +1,6 @@
 {
   "name": "angular-popeye",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "A simple modal library for AngularJS applications",
   "files": [
     "release/"
@@ -21,7 +21,10 @@
     "popeye",
     "window"
   ],
-  "author": "tech@pathgather.com",
+  "author": {
+    "name": "Pathgather",
+    "email": "tech@pathgather.com"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Pathgather/popeye/issues"
@@ -38,6 +41,7 @@
     "coffeeify": "^1.1.0",
     "cssnano": "^3.0.3",
     "grunt": "^0.4.5",
+    "grunt-banner": "^0.5.0",
     "grunt-browserify": "^4.0.1",
     "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-coffee": "^0.13.0",
