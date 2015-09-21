@@ -1,0 +1,43 @@
+{
+  "name": "angular-popeye",
+  "homepage": "https://github.com/Pathgather/popeye",
+  "authors": [
+    "tech@pathgather.com"
+  ],
+  "description": "A simple modal library for AngularJS applications",
+  "main": {
+    "release/popeye.js",
+    "release/popeye.css"
+  },
+  "dependencies": {
+    "angular": "^1.3.14",
+  },
+  "moduleType": [
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "angular",
+    "modal",
+    "popup",
+    "angularjs",
+    "popeye",
+    "window"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Pathgather/popeye"
+  },
+  "license": "MIT",
+  "ignore": [
+    "node_modules",
+    "bower_components",
+    "src"
+    "test",
+    "demo",
+    "Gruntfile.coffee",
+    "LICENSE",
+    "karma.conf.coffee",
+    "package.json"
+  ]
+}
