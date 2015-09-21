@@ -3,7 +3,7 @@ $pg-orange: #F67B45;
 $swing-angle: 2deg;
 
 body {
-  font-size: 16px;
+  font-size: 100%;
   text-size-adjust: 100%;
   font-family: 'Open Sans', sans-serif;
   color: #666;
@@ -14,11 +14,24 @@ body {
   }
 }
 
+@media screen and (max-width: 30em) {
+  body {
+    font-size: 90%;
+  }
+}
+
+@media screen and (max-width: 20em) {
+  body {
+    font-size: 80%;
+  }
+}
+
 .gh-ribbon {
   position: absolute;
   top: 0;
   right: 0;
   border: 0;
+  height: 8em;
 }
 
 .pg-logo {
@@ -40,7 +53,6 @@ body {
   }
 
   &.title p {
-    width: 70%;
     margin: 0.5em auto;
   }
 }
@@ -69,7 +81,7 @@ h2 {
 }
 
 h3 {
-  font-size: 1.5em;
+  font-size: 1.3em;
   font-weight: 100;
   margin-bottom: 0.5em;
 }
@@ -90,20 +102,22 @@ span.comment {
 
 .inline-code {
   background: #eee;
-  font-family: monospace;
+  font-family: monospace, monospace;
   color: $pg-blue;
   padding: 0;
+  font-size: 1em;
 }
 
 pre, code {
   display: block;
-  font-family: monospace;
+  font-family: monospace, monospace;
   background: #eee;
   color: $pg-blue;
   padding: 1em;
   border-radius: 3px;
   margin: 0.5em 0;
   overflow: scroll;
+  font-size: 1em;
 
   &.example {
     text-align: left;
@@ -148,8 +162,8 @@ table {
 .popeye-modal-container.demo-container {
   .popeye-modal.demo-modal {
     width: 50%;
-    min-width: 400px;
-    min-height: 400px;
+    min-width: 20em;
+    min-height: 25em;
     text-align: center;
 
     h2 {
@@ -157,7 +171,7 @@ table {
     }
 
     img {
-      height: 200px;
+      height: 12em;
       margin-bottom: 1em;
     }
 
@@ -171,7 +185,7 @@ table {
   pointer-events: none;
   z-index: 10;
   position: absolute;
-  top: 5px;
+  top: 0.3em;
   height: 100%;
 
   &.ng-enter {
@@ -194,8 +208,8 @@ table {
 
   .pg-balloon {
     background: $pg-blue;
-    height: 80px;
-    width: 70px;
+    height: 5em;
+    width: 4.375em;
     border-radius: 100%;
     border: 1px solid rgba(0, 0, 0, 0.2);
     animation: swing 4s infinite;
@@ -210,34 +224,34 @@ table {
 
     &::before {
       background: rgba(255, 255, 255, 0.7);
-      width: 40px;
-      height: 40px;
-      top: 10px;
-      left: 12px;
+      width: 2.5em;
+      height: 2.5em;
+      top: 0.625em;
+      left: 0.75em;
     }
 
     &::after {
       background: $pg-blue;
-      width: 48px;
-      height: 48px;
-      top: 11px;
-      left: 13px;
+      width: 3em;
+      height: 3em;
+      top: 0.6875em;
+      left: 0.8125em;
     }
 
     .pg-balloon-knot {
       position: relative;
-      top: 76px;
-      left: 32px;
-      width: 8px;
-      height: 8px;
+      top: 4.75em;
+      left: 2em;
+      width: 0.5em;
+      height: 0.5em;
       border-radius: 100%;
       background: $pg-blue;
 
       .pg-balloon-tail {
         position: relative;
-        top: 25px;
+        top: 1.5em;
         width: 2px;
-        height: 24px;
+        height: 1.5em;
         background-color: black;
         border-bottom: 1px solid black;
         transform-origin: top center;
@@ -247,8 +261,8 @@ table {
     }
 
     .pg-balloon-knot>.pg-balloon-tail {
-      top: 8px;
-      left: 3px;
+      top: 0.5em;
+      left: 0.2em;
     }
   }
 }

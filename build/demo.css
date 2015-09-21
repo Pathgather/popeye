@@ -1,5 +1,5 @@
 body {
-  font-size: 16px;
+  font-size: 100%;
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
           text-size-adjust: 100%;
@@ -9,11 +9,20 @@ body {
   body.modal-open {
     overflow: hidden; }
 
+@media screen and (max-width: 30em) {
+  body {
+    font-size: 90%; } }
+
+@media screen and (max-width: 20em) {
+  body {
+    font-size: 80%; } }
+
 .gh-ribbon {
   position: absolute;
   top: 0;
   right: 0;
-  border: 0; }
+  border: 0;
+  height: 8em; }
 
 .pg-logo {
   position: absolute;
@@ -30,7 +39,6 @@ body {
     fill: #4c93ea;
     height: 6em; }
   .step.title p {
-    width: 70%;
     margin: 0.5em auto; }
 
 #documentation p, #documentation pre {
@@ -51,7 +59,7 @@ h2 {
   margin-bottom: 0.5em; }
 
 h3 {
-  font-size: 1.5em;
+  font-size: 1.3em;
   font-weight: 100;
   margin-bottom: 0.5em; }
 
@@ -68,19 +76,21 @@ span.comment {
 
 .inline-code {
   background: #eee;
-  font-family: monospace;
+  font-family: monospace, monospace;
   color: #4C93EA;
-  padding: 0; }
+  padding: 0;
+  font-size: 1em; }
 
 pre, code {
   display: block;
-  font-family: monospace;
+  font-family: monospace, monospace;
   background: #eee;
   color: #4C93EA;
   padding: 1em;
   border-radius: 3px;
   margin: 0.5em 0;
-  overflow: scroll; }
+  overflow: scroll;
+  font-size: 1em; }
   pre.example, code.example {
     text-align: left; }
 
@@ -111,13 +121,13 @@ table {
 
 .popeye-modal-container.demo-container .popeye-modal.demo-modal {
   width: 50%;
-  min-width: 400px;
-  min-height: 400px;
+  min-width: 20em;
+  min-height: 25em;
   text-align: center; }
   .popeye-modal-container.demo-container .popeye-modal.demo-modal h2 {
     margin: 1em; }
   .popeye-modal-container.demo-container .popeye-modal.demo-modal img {
-    height: 200px;
+    height: 12em;
     margin-bottom: 1em; }
   .popeye-modal-container.demo-container .popeye-modal.demo-modal .close-button {
     margin: 0.5em auto; }
@@ -126,7 +136,7 @@ table {
   pointer-events: none;
   z-index: 10;
   position: absolute;
-  top: 5px;
+  top: 0.3em;
   height: 100%; }
   .pg-balloon-container.ng-enter {
     transition: -webkit-transform 3s ease-out;
@@ -150,8 +160,8 @@ table {
               transform: translateY(-200%); }
   .pg-balloon-container .pg-balloon {
     background: #4C93EA;
-    height: 80px;
-    width: 70px;
+    height: 5em;
+    width: 4.375em;
     border-radius: 100%;
     border: 1px solid rgba(0, 0, 0, 0.2);
     -webkit-animation: swing 4s infinite;
@@ -165,29 +175,29 @@ table {
       border-radius: 100%; }
     .pg-balloon-container .pg-balloon::before {
       background: rgba(255, 255, 255, 0.7);
-      width: 40px;
-      height: 40px;
-      top: 10px;
-      left: 12px; }
+      width: 2.5em;
+      height: 2.5em;
+      top: 0.625em;
+      left: 0.75em; }
     .pg-balloon-container .pg-balloon::after {
       background: #4C93EA;
-      width: 48px;
-      height: 48px;
-      top: 11px;
-      left: 13px; }
+      width: 3em;
+      height: 3em;
+      top: 0.6875em;
+      left: 0.8125em; }
     .pg-balloon-container .pg-balloon .pg-balloon-knot {
       position: relative;
-      top: 76px;
-      left: 32px;
-      width: 8px;
-      height: 8px;
+      top: 4.75em;
+      left: 2em;
+      width: 0.5em;
+      height: 0.5em;
       border-radius: 100%;
       background: #4C93EA; }
       .pg-balloon-container .pg-balloon .pg-balloon-knot .pg-balloon-tail {
         position: relative;
-        top: 25px;
+        top: 1.5em;
         width: 2px;
-        height: 24px;
+        height: 1.5em;
         background-color: black;
         border-bottom: 1px solid black;
         -webkit-transform-origin: top center;
@@ -198,8 +208,8 @@ table {
         -webkit-animation-timing-function: cubic-bezier(0.5, 0, 0.2, 1);
                 animation-timing-function: cubic-bezier(0.5, 0, 0.2, 1); }
     .pg-balloon-container .pg-balloon .pg-balloon-knot > .pg-balloon-tail {
-      top: 8px;
-      left: 3px; }
+      top: 0.5em;
+      left: 0.2em; }
 
 @-webkit-keyframes swing {
   0% {
