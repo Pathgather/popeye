@@ -1,3 +1,6 @@
+body.popeye-modal-open {
+  overflow: hidden; }
+
 .popeye-modal-container {
   position: fixed;
   bottom: 0;

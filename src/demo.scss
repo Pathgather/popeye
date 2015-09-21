@@ -8,10 +8,6 @@ body {
   font-family: 'Open Sans', sans-serif;
   color: #666;
   line-height: 1.2;
-
-  &.modal-open {
-    overflow: hidden;
-  }
 }
 
 @media screen and (max-width: 30em) {

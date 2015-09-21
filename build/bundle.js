@@ -3881,7 +3881,7 @@ module.exports = 'ngAnimate';
         defaults: {
           containerTemplate: "<div class=\"popeye-modal-container\">\n  <div class=\"popeye-modal\">\n    <a class=\"popeye-close-modal\" href ng-click=\"$close()\"></a>\n  </div>\n</div>",
           containerTemplateUrl: null,
-          bodyClass: "modal-open",
+          bodyClass: "popeye-modal-open",
           containerClass: null,
           modalClass: null,
           locals: null,
