@@ -57,7 +57,7 @@ describe "pathgather.popeye", ->
 
         it "adds a class to the body indicating that the modal is open", ->
           @$animate.flush()
-          expect(angular.element("body").hasClass("modal-open")).toBe(true)
+          expect(angular.element("body").hasClass("popeye-modal-open")).toBe(true)
 
         it "resolves the modal's opened promise", ->
           opened = false
@@ -375,10 +375,10 @@ describe "pathgather.popeye", ->
         expect(@modal.element).not.toBeInDOM()
 
       it "removes the class from the body indicating that the modal is open", ->
-        expect(angular.element("body").hasClass("modal-open")).toBe(true)
+        expect(angular.element("body").hasClass("popeye-modal-open")).toBe(true)
         @Popeye.closeCurrentModal()
         @$animate.flush()
-        expect(angular.element("body").hasClass("modal-open")).toBe(false)
+        expect(angular.element("body").hasClass("popeye-modal-open")).toBe(false)
 
       it "resolves the modal's closed promise", ->
         @modal.closed.then (result) =>

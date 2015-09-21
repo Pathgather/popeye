@@ -20,7 +20,7 @@ popeye = (angular) ->
           </div>
         """
         containerTemplateUrl: null
-        bodyClass: "modal-open"
+        bodyClass: "popeye-modal-open"
         containerClass: null
         modalClass: null
         locals: null

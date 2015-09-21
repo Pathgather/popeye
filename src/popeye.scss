@@ -4,6 +4,10 @@ $transparent: rgba(255, 255, 255, 0);
 $popeye-container-anim-duration: 0.7s;
 $popeye-modal-anim-duration: 0.4s;
 
+body.popeye-modal-open {
+  overflow: hidden;
+}
+
 .popeye-modal-container {
   position: fixed;
   bottom: 0;
