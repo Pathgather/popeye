@@ -36,6 +36,12 @@ module.exports = (grunt) ->
         options:
           transform: ['coffeeify']
 
+    # copy:demo - copy popeye.css to demo assets
+    copy:
+      demo:
+        files:
+          'build/popeye.css': 'node_modules/angular-popeye/release/popeye.css'
+
     # watch - rebuild demo files if any sources change
     watch:
       browserify:
@@ -45,6 +51,6 @@ module.exports = (grunt) ->
         files: ['src/*.scss']
         tasks: ['sass:demo', 'postcss:demo']
 
-  grunt.registerTask 'demo', ['clean', 'browserify:demo', 'sass:demo', 'postcss:demo']
+  grunt.registerTask 'demo', ['clean', 'browserify:demo', 'sass:demo', 'postcss:demo', 'copy:demo']
   grunt.registerTask 'watch', ['demo', 'watch']
   grunt.registerTask 'default', ['demo']
