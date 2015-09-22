@@ -19,42 +19,18 @@ body.popeye-modal-open {
   background-color: $popeye-bg;
 
   &.ng-enter {
-    background-color: $transparent;
-    transition: background-color $popeye-container-anim-duration;
+    animation: popeye-fade-in $popeye-container-anim-duration;
 
     .popeye-modal {
-      transform: translate(-50%, 50%);
-      opacity: 0;
-      transition: transform $popeye-modal-anim-duration, opacity $popeye-modal-anim-duration;
-    }
-
-    &.ng-enter-active {
-      background-color: $popeye-bg;
-
-      .popeye-modal {
-        transform: translate(-50%, -50%);
-        opacity: 1;
-      }
+      animation: popeye-slide-up $popeye-modal-anim-duration;
     }
   }
 
   &.ng-leave {
-    background-color: $popeye-bg;
-    transition: background-color $popeye-container-anim-duration;
+    animation: popeye-fade-out $popeye-container-anim-duration;
 
     .popeye-modal {
-      transform: translate(-50%, -50%);
-      opacity: 1;
-      transition: transform $popeye-modal-anim-duration, opacity $popeye-modal-anim-duration;
-    }
-
-    &.ng-leave-active {
-      background-color: $transparent;
-
-      .popeye-modal {
-        transform: translate(-50%, 50%);
-        opacity: 0;
-      }
+      animation: popeye-slide-down $popeye-modal-anim-duration forwards;
     }
   }
 
@@ -63,7 +39,6 @@ body.popeye-modal-open {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 40%;
     display: block;
     width: 60%;
     border-radius: 3px;
@@ -85,5 +60,49 @@ body.popeye-modal-open {
         content: "\d7";
       }
     }
+  }
+}
+
+@keyframes popeye-slide-up {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 50%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes popeye-slide-down {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, 50%);
+  }
+}
+
+@keyframes popeye-fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes popeye-fade-out {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
   }
 }

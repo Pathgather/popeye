@@ -156,11 +156,56 @@ table {
 }
 
 .popeye-modal-container.demo-container {
+  &.zoom {
+    background-color: rgba(246, 123, 69, 0.7);
+
+    &.ng-enter {
+      animation-duration: 0.5s;
+
+      .popeye-modal {
+        animation: zoom-in 0.5s ease-out;
+      }
+    }
+
+    &.ng-leave {
+      animation-duration: 0.5s;
+
+      .popeye-modal {
+        animation: zoom-out 0.5s ease-in;
+      }
+    }
+  }
+
+  &.boring {
+    background-color: rgba(0, 0, 0, 0.2);
+
+    &.ng-enter {
+      animation: none;
+
+      .popeye-modal {
+        animation: none;
+      }
+    }
+
+    &.ng-leave {
+      animation: none;
+
+      .popeye-modal {
+        animation: none;
+      }
+    }
+  }
+
   .popeye-modal.demo-modal {
     width: 50%;
     min-width: 20em;
     min-height: 25em;
     text-align: center;
+
+    &.small {
+      width: 30%;
+      min-height: 0;
+    }
 
     h2 {
       margin: 1em;
@@ -283,6 +328,24 @@ table {
   }
   100% {
     transform: rotate($swing-angle);
+  }
+}
+
+@keyframes zoom-in {
+  0% {
+    transform: translate(-50%, -50%) scale(0.1, 0.1) rotateZ(360deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1, 1) rotateZ(0deg);
+  }
+}
+
+@keyframes zoom-out {
+  0% {
+    transform: translate(-50%, -50%) scale(1, 1) rotateZ(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(3, 3) rotateZ(-360deg);
   }
 }
 

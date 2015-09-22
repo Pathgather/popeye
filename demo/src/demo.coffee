@@ -23,6 +23,24 @@ mod.controller "pgPopeyeDemoCtrl", (Popeye) ->
     )
     modal.closed.then => @balloons = false
 
+  @zoom = =>
+    Popeye.openModal(
+      template: "<h2>Zoom!</h2>"
+      containerClass: "demo-container zoom"
+    )
+
+  @small = =>
+    Popeye.openModal(
+      template: "<h2>Small!</h2>"
+      modalClass: "demo-modal small"
+    )
+
+  @boring = =>
+    Popeye.openModal(
+      template: "<h2>Boring.</h2>"
+      containerClass: "demo-container boring"
+    )
+
   return @
 
 mod.controller "pgPopeyeModalCtrl", (modal, Popeye) ->
