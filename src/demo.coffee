@@ -3,11 +3,12 @@ ngAnimate = require "angular-animate"
 popeye = require "angular-popeye"
 mod = angular.module "pgPopeyeDemoApp", [popeye, ngAnimate]
 
-mod.config (PopeyeProvider) ->
+mod.config ["PopeyeProvider", (PopeyeProvider) ->
   PopeyeProvider.defaults.containerClass = "demo-container"
   PopeyeProvider.defaults.modalClass = "demo-modal"
+]
 
-mod.controller "pgPopeyeDemoCtrl", (Popeye) ->
+mod.controller "pgPopeyeDemoCtrl", ["Popeye", (Popeye) ->
   @balloons = false
 
   @hello = =>
@@ -42,8 +43,9 @@ mod.controller "pgPopeyeDemoCtrl", (Popeye) ->
     )
 
   return @
+]
 
-mod.controller "pgPopeyeModalCtrl", (modal, Popeye) ->
+mod.controller "pgPopeyeModalCtrl", ["modal", "Popeye", (modal, Popeye) ->
   @close = ->
     modal.close()
 
@@ -59,8 +61,9 @@ mod.controller "pgPopeyeModalCtrl", (modal, Popeye) ->
     )
 
   return @
+]
 
-mod.directive "pgBalloons", ($interval, $timeout) ->
+mod.directive "pgBalloons", ["$interval", "$timeout", ($interval, $timeout) ->
   restrict: "A"
   scope:
     pgBalloons: "="
@@ -89,6 +92,7 @@ mod.directive "pgBalloons", ($interval, $timeout) ->
           $interval.cancel(creatingBalloons)
           creatingBalloons = null
           removeBalloons()
+]
 
 mod.directive "pgBalloon", ->
   restrict: "A"

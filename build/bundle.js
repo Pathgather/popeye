@@ -32958,101 +32958,109 @@ popeye = require("angular-popeye");
 
 mod = angular.module("pgPopeyeDemoApp", [popeye, ngAnimate]);
 
-mod.config(function(PopeyeProvider) {
-  PopeyeProvider.defaults.containerClass = "demo-container";
-  return PopeyeProvider.defaults.modalClass = "demo-modal";
-});
+mod.config([
+  "PopeyeProvider", function(PopeyeProvider) {
+    PopeyeProvider.defaults.containerClass = "demo-container";
+    return PopeyeProvider.defaults.modalClass = "demo-modal";
+  }
+]);
 
-mod.controller("pgPopeyeDemoCtrl", function(Popeye) {
-  this.balloons = false;
-  this.hello = (function(_this) {
-    return function() {
-      var modal;
-      _this.balloons = true;
-      modal = Popeye.openModal({
-        template: "<h2>Hello, Popeye!</h2>\n<img src=\"img/littleguys_1.png\" />\n<p>Popeye doesn't try to do anything fancy; it compiles your template and appends it to the body.</p>\n<a href class=\"button close-button\" ng-click=\"modalCtrl.again()\">Again!</a>",
+mod.controller("pgPopeyeDemoCtrl", [
+  "Popeye", function(Popeye) {
+    this.balloons = false;
+    this.hello = (function(_this) {
+      return function() {
+        var modal;
+        _this.balloons = true;
+        modal = Popeye.openModal({
+          template: "<h2>Hello, Popeye!</h2>\n<img src=\"img/littleguys_1.png\" />\n<p>Popeye doesn't try to do anything fancy; it compiles your template and appends it to the body.</p>\n<a href class=\"button close-button\" ng-click=\"modalCtrl.again()\">Again!</a>",
+          controller: "pgPopeyeModalCtrl as modalCtrl"
+        });
+        return modal.closed.then(function() {
+          return _this.balloons = false;
+        });
+      };
+    })(this);
+    this.zoom = (function(_this) {
+      return function() {
+        return Popeye.openModal({
+          template: "<h2>Zoom!</h2>",
+          containerClass: "demo-container zoom"
+        });
+      };
+    })(this);
+    this.small = (function(_this) {
+      return function() {
+        return Popeye.openModal({
+          template: "<h2>Small</h2>",
+          modalClass: "demo-modal small"
+        });
+      };
+    })(this);
+    this.boring = (function(_this) {
+      return function() {
+        return Popeye.openModal({
+          template: "<h2>Boring.</h2>",
+          containerClass: "demo-container boring"
+        });
+      };
+    })(this);
+    return this;
+  }
+]);
+
+mod.controller("pgPopeyeModalCtrl", [
+  "modal", "Popeye", function(modal, Popeye) {
+    this.close = function() {
+      return modal.close();
+    };
+    this.again = function() {
+      return Popeye.openModal({
+        template: "<h2>No-Mess Modals!</h2>\n<img src=\"img/littleguys_2.png\" />\n<p>Popeye makes sure only one modal is active. No modal stack, no dependencies, no mess. Let's check it out!</p>\n<a href class=\"button close-button\" ng-click=\"modalCtrl.close()\">Close</a>",
         controller: "pgPopeyeModalCtrl as modalCtrl"
       });
-      return modal.closed.then(function() {
-        return _this.balloons = false;
-      });
     };
-  })(this);
-  this.zoom = (function(_this) {
-    return function() {
-      return Popeye.openModal({
-        template: "<h2>Zoom!</h2>",
-        containerClass: "demo-container zoom"
-      });
-    };
-  })(this);
-  this.small = (function(_this) {
-    return function() {
-      return Popeye.openModal({
-        template: "<h2>Small</h2>",
-        modalClass: "demo-modal small"
-      });
-    };
-  })(this);
-  this.boring = (function(_this) {
-    return function() {
-      return Popeye.openModal({
-        template: "<h2>Boring.</h2>",
-        containerClass: "demo-container boring"
-      });
-    };
-  })(this);
-  return this;
-});
+    return this;
+  }
+]);
 
-mod.controller("pgPopeyeModalCtrl", function(modal, Popeye) {
-  this.close = function() {
-    return modal.close();
-  };
-  this.again = function() {
-    return Popeye.openModal({
-      template: "<h2>No-Mess Modals!</h2>\n<img src=\"img/littleguys_2.png\" />\n<p>Popeye makes sure only one modal is active. No modal stack, no dependencies, no mess. Let's check it out!</p>\n<a href class=\"button close-button\" ng-click=\"modalCtrl.close()\">Close</a>",
-      controller: "pgPopeyeModalCtrl as modalCtrl"
-    });
-  };
-  return this;
-});
-
-mod.directive("pgBalloons", function($interval, $timeout) {
-  return {
-    restrict: "A",
-    scope: {
-      pgBalloons: "="
-    },
-    template: "<div class=\"pg-balloon-container ng-animate\" ng-style=\"{ left: offset }\" ng-repeat=\"offset in balloonOffsets track by $index\" >\n  <div pg-balloon ></div>\n</div>",
-    link: function(scope, element, attrs) {
-      var addBalloon, creatingBalloons, removeBalloons;
-      scope.balloonOffsets = [];
-      creatingBalloons = null;
-      addBalloon = function() {
-        return scope.balloonOffsets.push((Math.random() * 70) + 15 + "%");
-      };
-      removeBalloons = function() {
-        return scope.balloonOffsets = [];
-      };
-      return scope.$watch("pgBalloons", function(newVal, oldVal) {
-        if (oldVal !== newVal) {
-          if (newVal) {
-            creatingBalloons = $interval(addBalloon, 200);
-            return $timeout(function() {
+mod.directive("pgBalloons", [
+  "$interval", "$timeout", function($interval, $timeout) {
+    return {
+      restrict: "A",
+      scope: {
+        pgBalloons: "="
+      },
+      template: "<div class=\"pg-balloon-container ng-animate\" ng-style=\"{ left: offset }\" ng-repeat=\"offset in balloonOffsets track by $index\" >\n  <div pg-balloon ></div>\n</div>",
+      link: function(scope, element, attrs) {
+        var addBalloon, creatingBalloons, removeBalloons;
+        scope.balloonOffsets = [];
+        creatingBalloons = null;
+        addBalloon = function() {
+          return scope.balloonOffsets.push((Math.random() * 70) + 15 + "%");
+        };
+        removeBalloons = function() {
+          return scope.balloonOffsets = [];
+        };
+        return scope.$watch("pgBalloons", function(newVal, oldVal) {
+          if (oldVal !== newVal) {
+            if (newVal) {
+              creatingBalloons = $interval(addBalloon, 200);
+              return $timeout(function() {
+                $interval.cancel(creatingBalloons);
+                return creatingBalloons = null;
+              }, 3000);
+            } else {
               $interval.cancel(creatingBalloons);
-              return creatingBalloons = null;
-            }, 3000);
-          } else {
-            $interval.cancel(creatingBalloons);
-            creatingBalloons = null;
-            return removeBalloons();
+              creatingBalloons = null;
+              return removeBalloons();
+            }
           }
-        }
-      });
-    }
-  };
-});
+        });
+      }
+    };
+  }
+]);
 
 mod.directive("pgBalloon", function() {
   return {

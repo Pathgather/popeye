@@ -36,6 +36,12 @@ module.exports = (grunt) ->
         options:
           transform: ['coffeeify']
 
+    # uglify:demo - minify bundle for demo
+    uglify:
+      demo:
+        files:
+          'build/bundle.min.js': 'build/bundle.js'
+
     # copy:demo - copy popeye.css to demo assets
     copy:
       demo:
@@ -46,11 +52,11 @@ module.exports = (grunt) ->
     watch:
       browserify:
         files: ['src/*.coffee']
-        tasks: ['browserify:demo']
+        tasks: ['browserify:demo', 'uglify:demo']
       sass:
         files: ['src/*.scss']
         tasks: ['sass:demo', 'postcss:demo']
 
-  grunt.registerTask 'demo', ['clean', 'browserify:demo', 'sass:demo', 'postcss:demo', 'copy:demo']
+  grunt.registerTask 'demo', ['clean', 'browserify:demo', 'uglify:demo', 'sass:demo', 'postcss:demo', 'copy:demo']
   grunt.registerTask 'demo:watch', ['demo', 'watch']
   grunt.registerTask 'default', ['demo']
