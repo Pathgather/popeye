@@ -17,7 +17,7 @@ mod.controller "pgPopeyeDemoCtrl", (Popeye) ->
         <h2>Hello, Popeye!</h2>
         <img src="img/littleguys_1.png" />
         <p>Popeye doesn't try to do anything fancy; it compiles your template and appends it to the body.</p>
-        <a href="#" class="button close-button" ng-click="modalCtrl.again()">Again!</a>
+        <a href class="button close-button" ng-click="modalCtrl.again()">Again!</a>
       """
       controller: "pgPopeyeModalCtrl as modalCtrl"
     )
@@ -31,7 +31,7 @@ mod.controller "pgPopeyeDemoCtrl", (Popeye) ->
 
   @small = =>
     Popeye.openModal(
-      template: "<h2>Small!</h2>"
+      template: "<h2>Small</h2>"
       modalClass: "demo-modal small"
     )
 
@@ -53,7 +53,7 @@ mod.controller "pgPopeyeModalCtrl", (modal, Popeye) ->
         <h2>No-Mess Modals!</h2>
         <img src="img/littleguys_2.png" />
         <p>Popeye makes sure only one modal is active. No modal stack, no dependencies, no mess. Let's check it out!</p>
-        <a href="#" class="button close-button" ng-click="modalCtrl.close()">Close</a>
+        <a href class="button close-button" ng-click="modalCtrl.close()">Close</a>
       """
       controller: "pgPopeyeModalCtrl as modalCtrl"
     )
@@ -74,7 +74,7 @@ mod.directive "pgBalloons", ($interval, $timeout) ->
     scope.balloonOffsets = []
     creatingBalloons = null
 
-    addBalloon = -> scope.balloonOffsets.push(((Math.random() * 110) - 10) + "%");
+    addBalloon = -> scope.balloonOffsets.push((Math.random() * 70) + 15 + "%");
     removeBalloons = -> scope.balloonOffsets = []
 
     scope.$watch "pgBalloons", (newVal, oldVal) ->

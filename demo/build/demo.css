@@ -5,15 +5,101 @@ body {
           text-size-adjust: 100%;
   font-family: 'Open Sans', sans-serif;
   color: #666;
-  line-height: 1.2; }
+  line-height: 1.2;
+  height: 100%; }
 
 @media screen and (max-width: 30em) {
   body {
-    font-size: 90%; } }
+    font-size: 90%; }
+  .step a.button {
+    display: block; } }
 
-@media screen and (max-width: 20em) {
+@media screen and (max-height: 30em) {
+  body {
+    font-size: 90%; }
+  .popeye-modal.demo-modal img {
+    display: none; } }
+
+@media screen and (max-width: 20em), screen and (max-height: 20em) {
   body {
     font-size: 80%; } }
+
+.popeye-modal-container.demo-container .popeye-modal.demo-modal {
+  width: 40%;
+  min-width: 18em;
+  min-height: 10em;
+  text-align: center; }
+  .popeye-modal-container.demo-container .popeye-modal.demo-modal img {
+    height: 10em;
+    margin-bottom: 1em; }
+
+.popeye-modal-container.demo-container.zoom {
+  background-color: rgba(246, 123, 69, 0.7); }
+  .popeye-modal-container.demo-container.zoom.ng-enter {
+    -webkit-animation-duration: 0.5s;
+            animation-duration: 0.5s; }
+    .popeye-modal-container.demo-container.zoom.ng-enter .popeye-modal {
+      -webkit-animation: zoom-in 0.5s ease-out;
+              animation: zoom-in 0.5s ease-out; }
+  .popeye-modal-container.demo-container.zoom.ng-leave {
+    -webkit-animation-duration: 0.5s;
+            animation-duration: 0.5s; }
+    .popeye-modal-container.demo-container.zoom.ng-leave .popeye-modal {
+      -webkit-animation: zoom-out 0.5s ease-in;
+              animation: zoom-out 0.5s ease-in; }
+
+@-webkit-keyframes zoom-in {
+  0% {
+    -webkit-transform: translate(-50%, -50%) scale(0.1, 0.1) rotateZ(360deg);
+            transform: translate(-50%, -50%) scale(0.1, 0.1) rotateZ(360deg); }
+  100% {
+    -webkit-transform: translate(-50%, -50%) scale(1, 1) rotateZ(0deg);
+            transform: translate(-50%, -50%) scale(1, 1) rotateZ(0deg); } }
+
+@keyframes zoom-in {
+  0% {
+    -webkit-transform: translate(-50%, -50%) scale(0.1, 0.1) rotateZ(360deg);
+            transform: translate(-50%, -50%) scale(0.1, 0.1) rotateZ(360deg); }
+  100% {
+    -webkit-transform: translate(-50%, -50%) scale(1, 1) rotateZ(0deg);
+            transform: translate(-50%, -50%) scale(1, 1) rotateZ(0deg); } }
+
+@-webkit-keyframes zoom-out {
+  0% {
+    -webkit-transform: translate(-50%, -50%) scale(1, 1) rotateZ(0deg);
+            transform: translate(-50%, -50%) scale(1, 1) rotateZ(0deg); }
+  100% {
+    -webkit-transform: translate(-50%, -50%) scale(3, 3) rotateZ(-360deg);
+            transform: translate(-50%, -50%) scale(3, 3) rotateZ(-360deg); } }
+
+@keyframes zoom-out {
+  0% {
+    -webkit-transform: translate(-50%, -50%) scale(1, 1) rotateZ(0deg);
+            transform: translate(-50%, -50%) scale(1, 1) rotateZ(0deg); }
+  100% {
+    -webkit-transform: translate(-50%, -50%) scale(3, 3) rotateZ(-360deg);
+            transform: translate(-50%, -50%) scale(3, 3) rotateZ(-360deg); } }
+
+.popeye-modal-container.demo-container .popeye-modal.demo-modal.small {
+  width: 30%;
+  min-width: 0;
+  min-height: 0;
+  padding: 1.5em 0.5em 0.5em 0.5em; }
+
+.popeye-modal-container.demo-container.boring {
+  background-color: rgba(0, 0, 0, 0.2); }
+  .popeye-modal-container.demo-container.boring.ng-enter {
+    -webkit-animation: none;
+            animation: none; }
+    .popeye-modal-container.demo-container.boring.ng-enter .popeye-modal {
+      -webkit-animation: none;
+              animation: none; }
+  .popeye-modal-container.demo-container.boring.ng-leave {
+    -webkit-animation: none;
+            animation: none; }
+    .popeye-modal-container.demo-container.boring.ng-leave .popeye-modal {
+      -webkit-animation: none;
+              animation: none; }
 
 .gh-ribbon {
   position: absolute;
@@ -39,11 +125,10 @@ body {
   .step.title p {
     margin: 0.5em auto; }
 
-#documentation p, #documentation pre {
-  text-align: left; }
-
-#documentation .documentation {
+.documentation {
   margin-bottom: 4em; }
+  .documentation p, .documentation pre {
+    text-align: left; }
 
 h1 {
   font-size: 4em;
@@ -92,16 +177,20 @@ pre, code {
   pre.example, code.example {
     text-align: left; }
 
-a.button {
-  font-size: 1.5em;
-  color: #fff;
-  background: #4C93EA;
-  border: 1px solid #aaa;
-  border-radius: 3px;
-  padding: 0.5em 1.4em;
-  margin-top: 1em;
-  display: inline-block;
-  text-decoration: none; }
+a {
+  color: #4C93EA;
+  text-decoration: none;
+  font-weight: 600; }
+  a.button {
+    font-size: 1.5em;
+    font-weight: 400;
+    color: #fff;
+    background: #4C93EA;
+    border: 1px solid #aaa;
+    border-radius: 3px;
+    padding: 0.5em 1.4em;
+    margin-top: 1em;
+    display: inline-block; }
 
 table {
   text-align: left;
@@ -117,88 +206,35 @@ table {
   table td, table th {
     padding: 0.5em; }
 
-.popeye-modal-container.demo-container.zoom {
-  background-color: rgba(246, 123, 69, 0.7); }
-  .popeye-modal-container.demo-container.zoom.ng-enter {
-    -webkit-animation-duration: 0.5s;
-            animation-duration: 0.5s; }
-    .popeye-modal-container.demo-container.zoom.ng-enter .popeye-modal {
-      -webkit-animation: zoom-in 0.5s ease-out;
-              animation: zoom-in 0.5s ease-out; }
-  .popeye-modal-container.demo-container.zoom.ng-leave {
-    -webkit-animation-duration: 0.5s;
-            animation-duration: 0.5s; }
-    .popeye-modal-container.demo-container.zoom.ng-leave .popeye-modal {
-      -webkit-animation: zoom-out 0.5s ease-in;
-              animation: zoom-out 0.5s ease-in; }
-
-.popeye-modal-container.demo-container.boring {
-  background-color: rgba(0, 0, 0, 0.2); }
-  .popeye-modal-container.demo-container.boring.ng-enter {
-    -webkit-animation: none;
-            animation: none; }
-    .popeye-modal-container.demo-container.boring.ng-enter .popeye-modal {
-      -webkit-animation: none;
-              animation: none; }
-  .popeye-modal-container.demo-container.boring.ng-leave {
-    -webkit-animation: none;
-            animation: none; }
-    .popeye-modal-container.demo-container.boring.ng-leave .popeye-modal {
-      -webkit-animation: none;
-              animation: none; }
-
-.popeye-modal-container.demo-container .popeye-modal.demo-modal {
-  width: 50%;
-  min-width: 20em;
-  min-height: 25em;
-  text-align: center; }
-  .popeye-modal-container.demo-container .popeye-modal.demo-modal.small {
-    width: 30%;
-    min-height: 0; }
-  .popeye-modal-container.demo-container .popeye-modal.demo-modal h2 {
-    margin: 1em; }
-  .popeye-modal-container.demo-container .popeye-modal.demo-modal img {
-    height: 12em;
-    margin-bottom: 1em; }
-  .popeye-modal-container.demo-container .popeye-modal.demo-modal .close-button {
-    margin: 0.5em auto; }
-
-.pg-balloons {
-  pointer-events: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  overflow: hidden; }
-
 .pg-balloon-container {
   pointer-events: none;
   z-index: 10;
-  position: absolute;
+  position: fixed;
   top: 0.3em;
-  height: 100%; }
+  height: 100%;
+  -webkit-transform: translate(-50%, 0%);
+      -ms-transform: translate(-50%, 0%);
+          transform: translate(-50%, 0%); }
   .pg-balloon-container.ng-enter {
     transition: -webkit-transform 3s ease-out;
     transition: transform 3s ease-out;
-    -webkit-transform: translateY(100%);
-        -ms-transform: translateY(100%);
-            transform: translateY(100%); }
+    -webkit-transform: translate(-50%, 100%);
+        -ms-transform: translate(-50%, 100%);
+            transform: translate(-50%, 100%); }
     .pg-balloon-container.ng-enter.ng-enter-active {
-      -webkit-transform: translateY(0%);
-          -ms-transform: translateY(0%);
-              transform: translateY(0%); }
+      -webkit-transform: translate(-50%, 0%);
+          -ms-transform: translate(-50%, 0%);
+              transform: translate(-50%, 0%); }
   .pg-balloon-container.ng-leave {
     transition: -webkit-transform 6s ease-in;
     transition: transform 6s ease-in;
-    -webkit-transform: translateY(0%);
-        -ms-transform: translateY(0%);
-            transform: translateY(0%); }
+    -webkit-transform: translate(-50%, 0%);
+        -ms-transform: translate(-50%, 0%);
+            transform: translate(-50%, 0%); }
     .pg-balloon-container.ng-leave.ng-leave-active {
-      -webkit-transform: translateY(-200%);
-          -ms-transform: translateY(-200%);
-              transform: translateY(-200%); }
+      -webkit-transform: translate(-50%, -200%);
+          -ms-transform: translate(-50%, -200%);
+              transform: translate(-50%, -200%); }
   .pg-balloon-container .pg-balloon {
     background: #4C93EA;
     height: 5em;
@@ -273,35 +309,3 @@ table {
   100% {
     -webkit-transform: rotate(2deg);
             transform: rotate(2deg); } }
-
-@-webkit-keyframes zoom-in {
-  0% {
-    -webkit-transform: translate(-50%, -50%) scale(0.1, 0.1) rotateZ(360deg);
-            transform: translate(-50%, -50%) scale(0.1, 0.1) rotateZ(360deg); }
-  100% {
-    -webkit-transform: translate(-50%, -50%) scale(1, 1) rotateZ(0deg);
-            transform: translate(-50%, -50%) scale(1, 1) rotateZ(0deg); } }
-
-@keyframes zoom-in {
-  0% {
-    -webkit-transform: translate(-50%, -50%) scale(0.1, 0.1) rotateZ(360deg);
-            transform: translate(-50%, -50%) scale(0.1, 0.1) rotateZ(360deg); }
-  100% {
-    -webkit-transform: translate(-50%, -50%) scale(1, 1) rotateZ(0deg);
-            transform: translate(-50%, -50%) scale(1, 1) rotateZ(0deg); } }
-
-@-webkit-keyframes zoom-out {
-  0% {
-    -webkit-transform: translate(-50%, -50%) scale(1, 1) rotateZ(0deg);
-            transform: translate(-50%, -50%) scale(1, 1) rotateZ(0deg); }
-  100% {
-    -webkit-transform: translate(-50%, -50%) scale(3, 3) rotateZ(-360deg);
-            transform: translate(-50%, -50%) scale(3, 3) rotateZ(-360deg); } }
-
-@keyframes zoom-out {
-  0% {
-    -webkit-transform: translate(-50%, -50%) scale(1, 1) rotateZ(0deg);
-            transform: translate(-50%, -50%) scale(1, 1) rotateZ(0deg); }
-  100% {
-    -webkit-transform: translate(-50%, -50%) scale(3, 3) rotateZ(-360deg);
-            transform: translate(-50%, -50%) scale(3, 3) rotateZ(-360deg); } }

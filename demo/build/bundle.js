@@ -21,7 +21,7 @@ mod.controller("pgPopeyeDemoCtrl", function(Popeye) {
       var modal;
       _this.balloons = true;
       modal = Popeye.openModal({
-        template: "<h2>Hello, Popeye!</h2>\n<img src=\"img/littleguys_1.png\" />\n<p>Popeye doesn't try to do anything fancy; it compiles your template and appends it to the body.</p>\n<a href=\"#\" class=\"button close-button\" ng-click=\"modalCtrl.again()\">Again!</a>",
+        template: "<h2>Hello, Popeye!</h2>\n<img src=\"img/littleguys_1.png\" />\n<p>Popeye doesn't try to do anything fancy; it compiles your template and appends it to the body.</p>\n<a href class=\"button close-button\" ng-click=\"modalCtrl.again()\">Again!</a>",
         controller: "pgPopeyeModalCtrl as modalCtrl"
       });
       return modal.closed.then(function() {
@@ -40,7 +40,7 @@ mod.controller("pgPopeyeDemoCtrl", function(Popeye) {
   this.small = (function(_this) {
     return function() {
       return Popeye.openModal({
-        template: "<h2>Small!</h2>",
+        template: "<h2>Small</h2>",
         modalClass: "demo-modal small"
       });
     };
@@ -62,7 +62,7 @@ mod.controller("pgPopeyeModalCtrl", function(modal, Popeye) {
   };
   this.again = function() {
     return Popeye.openModal({
-      template: "<h2>No-Mess Modals!</h2>\n<img src=\"img/littleguys_2.png\" />\n<p>Popeye makes sure only one modal is active. No modal stack, no dependencies, no mess. Let's check it out!</p>\n<a href=\"#\" class=\"button close-button\" ng-click=\"modalCtrl.close()\">Close</a>",
+      template: "<h2>No-Mess Modals!</h2>\n<img src=\"img/littleguys_2.png\" />\n<p>Popeye makes sure only one modal is active. No modal stack, no dependencies, no mess. Let's check it out!</p>\n<a href class=\"button close-button\" ng-click=\"modalCtrl.close()\">Close</a>",
       controller: "pgPopeyeModalCtrl as modalCtrl"
     });
   };
@@ -81,7 +81,7 @@ mod.directive("pgBalloons", function($interval, $timeout) {
       scope.balloonOffsets = [];
       creatingBalloons = null;
       addBalloon = function() {
-        return scope.balloonOffsets.push(((Math.random() * 110) - 10) + "%");
+        return scope.balloonOffsets.push((Math.random() * 70) + 15 + "%");
       };
       removeBalloons = function() {
         return scope.balloonOffsets = [];

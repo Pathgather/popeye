@@ -6,6 +6,8 @@
   <meta name="description" content="Popeye is a simple modal library for AngularJS applications" />
   <meta name="keywords" content="angular, modal, popup, angularjs, popeye, javascript, pathgather" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
   <title>Popeye | A simple modal library for AngularJS applications by Pathgather</title>
   <link rel="stylesheet" href="build/reset.css" />
   <link rel="stylesheet" href="../release/popeye.css" />
@@ -21,7 +23,17 @@
     <img class="pg-logo" src="img/logo_orange.png" />
   </a>
   <div class="step title">
-    <svg class="pg-balloon-logo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve"><g display="inline"><path d="M51.123,66.397c-0.934-0.582-1.525-0.175-1.314,0.904l1.971,10.109c0.211,1.079,1.077,1.391,1.926,0.69    l5.426-4.473c0.849-0.7,0.779-1.749-0.154-2.331L51.123,66.397z"></path></g><path display="inline" d="M37.418,96.938c-0.522,0-1.029-0.272-1.305-0.758c-0.41-0.72-0.158-1.636,0.562-2.046   c5.019-2.856,4.865-5.358,4.56-10.344c-0.077-1.263-0.165-2.694-0.165-4.258c0-8.365,7.784-13.18,8.115-13.381   c0.709-0.427,1.631-0.203,2.06,0.506c0.43,0.708,0.204,1.629-0.503,2.059c-0.107,0.066-6.672,4.182-6.672,10.816   c0,1.472,0.081,2.795,0.16,4.075c0.32,5.226,0.573,9.353-6.07,13.134C37.924,96.874,37.669,96.938,37.418,96.938L37.418,96.938z"></path></g><g><path d="M75.99,32.014c0-15.438-11.653-27.952-26.028-27.952S23.935,16.577,23.935,32.014   c0,16.021,14.529,32.708,23.872,35.114c-2.32,1.816-6.737,6.101-6.737,12.404c0,1.563,0.088,2.995,0.165,4.258   c0.305,4.985,0.458,7.487-4.56,10.344c-0.72,0.41-0.971,1.326-0.562,2.046c0.276,0.485,0.783,0.758,1.305,0.758   c0.251,0,0.506-0.063,0.741-0.196c6.643-3.781,6.39-7.908,6.07-13.134c-0.079-1.28-0.16-2.604-0.16-4.075   c0-5.484,4.477-9.239,6.093-10.417l0.249,1.278c0.21,1.079,0.555,2.847,0.766,3.926l0.603,3.092   c0.211,1.079,1.077,1.391,1.926,0.69l1.17-0.964c0.849-0.7,2.237-1.845,3.086-2.545l1.17-0.964c0.849-0.7,0.779-1.749-0.154-2.331   l-2.229-1.392c-0.934-0.582-2.461-1.535-3.395-2.117l-1.109-0.692C61.591,64.594,75.99,48.1,75.99,32.014z"></path></g></svg>
+    <svg class="pg-balloon-logo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+      <g display="inline">
+        <path d="M51.123,66.397c-0.934-0.582-1.525-0.175-1.314,0.904l1.971,10.109c0.211,1.079,1.077,1.391,1.926,0.69 l5.426-4.473c0.849-0.7,0.779-1.749-0.154-2.331L51.123,66.397z"></path>
+      </g>
+      <g display="inline">
+        <path d="M37.418,96.938c-0.522,0-1.029-0.272-1.305-0.758c-0.41-0.72-0.158-1.636,0.562-2.046 c5.019-2.856,4.865-5.358,4.56-10.344c-0.077-1.263-0.165-2.694-0.165-4.258c0-8.365,7.784-13.18,8.115-13.381 c0.709-0.427,1.631-0.203,2.06,0.506c0.43,0.708,0.204,1.629-0.503,2.059c-0.107,0.066-6.672,4.182-6.672,10.816 c0,1.472,0.081,2.795,0.16,4.075c0.32,5.226,0.573,9.353-6.07,13.134C37.924,96.874,37.669,96.938,37.418,96.938L37.418,96.938z"></path>
+      </g>
+      <g>
+        <path d="M75.99,32.014c0-15.438-11.653-27.952-26.028-27.952S23.935,16.577,23.935,32.014 c0,16.021,14.529,32.708,23.872,35.114c-2.32,1.816-6.737,6.101-6.737,12.404c0,1.563,0.088,2.995,0.165,4.258 c0.305,4.985,0.458,7.487-4.56,10.344c-0.72,0.41-0.971,1.326-0.562,2.046c0.276,0.485,0.783,0.758,1.305,0.758 c0.251,0,0.506-0.063,0.741-0.196c6.643-3.781,6.39-7.908,6.07-13.134c-0.079-1.28-0.16-2.604-0.16-4.075 c0-5.484,4.477-9.239,6.093-10.417l0.249,1.278c0.21,1.079,0.555,2.847,0.766,3.926l0.603,3.092 c0.211,1.079,1.077,1.391,1.926,0.69l1.17-0.964c0.849-0.7,2.237-1.845,3.086-2.545l1.17-0.964c0.849-0.7,0.779-1.749-0.154-2.331 l-2.229-1.392c-0.934-0.582-2.461-1.535-3.395-2.117l-1.109-0.692C61.591,64.594,75.99,48.1,75.99,32.014z"></path>
+      </g>
+    </svg>
     <h1>Popeye</h1>
     <h2>A simple modal library for AngularJS applications</h2>
     <p>
@@ -31,7 +43,7 @@
       <br/>
       Isn't that all you really want, anyways?
     </p>
-    <a href="#" ng-click="ctrl.hello()" class="button">Click me!</a>
+    <a href ng-click="ctrl.hello()" class="button">Click me!</a>
   </div>
   <div id="install" class="step">
     <h2>Step 1: Install</h3>
@@ -65,6 +77,11 @@
       <code>
         var mod = angular.module("MyApp", [<span class="highlight">"pathgather.popeye"</span>]);
       </code>
+    </p>
+    <br/>
+    <p>
+      If you want to use the default animations, you'll also need to include
+      <a target="_blank" href="https://docs.angularjs.org/api/ngAnimate" >ngAnimate</a>, too.
     </p>
   </div>
   <div id="usage" class="step">
@@ -113,20 +130,26 @@ mod.controller("myCtrl", function($scope, <span class="highlight">Popeye</span>)
   </div>
   <div id="customize" class="step">
     <h2>Step 4: Customize</h2>
-    <a href ng-click="ctrl.zoom()" class="button">Zoom!</a>
-    <a href ng-click="ctrl.small()" class="button">Small!</a>
-    <a href ng-click="ctrl.boring()" class="button">Boring.</a>
+    <p>Popeye ships with default CSS that will size your modals, add a blue background, vertically & horizontally center
+    the modal, and add enter & leave animations. It's easy to customize all of this by adding your own
+    <span class="inline-code">containerClass</span> and <span class="inline-code">modalClass</span> classes and then
+    overriding the default rules. Here are a couple of examples:<br/>
+      <a href ng-click="ctrl.zoom()" class="button">Zoom!</a>
+      <a href ng-click="ctrl.small()" class="button">Small</a>
+      <a href ng-click="ctrl.boring()" class="button">Boring.</a>
+    </p>
+    <p>(Check the <a target="_blank" href="https://github.com/Pathgather/popeye/blob/gh-pages/src/demo.scss" >demo source code</a> to see
+    how these are done.)</p>
   </div>
   <div id="documentation" class="step">
     <h2>Step 5: Documentation</h2>
     <div id="openModal" class="documentation">
       <h3><span class="inline-code"><span class="highlight">Popeye</span>.openModal(options)</span></h3>
-      <p>Creates a new <span class="inline-code">PopeyeModal</span> with the given
+      <p>Creates a new <span class="inline-code highlight">PopeyeModal</span> with the given
       <span class="inline-code">options</span> and opens it. This will cause any existing modals to close first before
       the new modal is resolved and then opened.</p>
-      <p>Returns the new <span class="inline-code">PopeyeModal</span> instance, which you'll usually want to hold on to.</p>
-      <p>By default, <span class="highlight">Popeye</span> uses a <span class="inline-code">containerTemplate</span>
-      that looks like this: </p>
+      <p>Returns the new <span class="inline-code highlight">PopeyeModal</span> instance, which you'll usually want to hold on to.</p>
+      <p>By default, Popeye uses a <span class="inline-code">containerTemplate</span> that looks like this: </p>
       <pre>
 &lt;div class="popeye-modal-container"&gt;
   &lt;div class="popeye-modal"&gt;
@@ -134,7 +157,7 @@ mod.controller("myCtrl", function($scope, <span class="highlight">Popeye</span>)
     &lt;-- your modal template is appended here --&gt;
   &lt;/div&gt;
 &lt;/div&gt;</pre>
-      <p>The default styles in <span class="highlight">popeye.css</span> absolutely position the container to cover the
+      <p>The default styles in <span class="inline-code highlight">popeye.css</span> absolutely position the container to cover the
       entire window, centers the modal within that container, and positions the close link in the top right. You can, of
       course, override all of this with your own CSS, or change the <span class="inline-code">containerTemplate</span>
       to your own template if you prefer.</p>
@@ -205,9 +228,9 @@ mod.controller("myCtrl", function($scope, <span class="highlight">Popeye</span>)
           <td><span class="inline-code">containerTemplate</span><br/>(string)</td>
           <td>
             HTML template that acts as a container for the modal template. The compiled template is appended to this
-            container. By default, this is:
-            Note: if you override this, you must include a <span class="inline-code">.popeye-modal</span> element so that
-            the code knows where to insert your modal template
+            container.<br/><br/>
+            NOTE: if you override this option, you must include a <span class="inline-code">.popeye-modal</span> element
+            so that Popeye knows where to insert your modal template
           </td>
         </tr>
         <tr>
@@ -223,11 +246,11 @@ mod.controller("myCtrl", function($scope, <span class="highlight">Popeye</span>)
     <div id="closeCurrentModal" class="documentation">
       <h3><span class="inline-code"><span class="highlight">Popeye</span>.closeCurrentModal(value)</span></h3>
       <p>Calls <span class="inline-code">close(value)</span> on the currently active
-      <span class="inline-code">PopeyeModal</span> if there is one.</p>
-      <p>Returns the current <span class="inline-code">PopeyeModal</span> instance (which is now closing)</p>
+      <span class="inline-code highlight">PopeyeModal</span> if there is one.</p>
+      <p>Returns the current <span class="inline-code highlight">PopeyeModal</span> instance (which is now closing)</p>
     </div>
     <div id="PopeyeModal" class="documentation">
-      <h3><span class="inline-code"><span class="highlight">PopeyeModal</span></span></h3>
+      <h3><span class="inline-code highlight">PopeyeModal</span></h3>
       <p>This object handles resolving, opening, and closing modals. A new instance is created on each call to
       <span class="inline-code"><span class="highlight">Popeye</span>.openModal</span>. You can use this object to wait
       on the various promises to do something when the modal is resolved, opened, or closed. Each instance also exposes
@@ -308,9 +331,9 @@ mod.controller("myCtrl", function($scope, <span class="highlight">Popeye</span>)
     </div>
     <div id="PopeyeProvider" class="documentation">
       <h3><span class="inline-code"><span class="highlight">PopeyeProvider</span></span></h3>
-      <p>The Angular provider for the <span class="highlight">Popeye</span> service. You can use this provider to
-      configure default options for your application by modifying the <span class="inline-code">defaults</span>
-      property like this:</p>
+      <p>The Angular provider for the <span class="inline-code highlight">Popeye</span> service. You can use this
+      provider to configure default options for your application by modifying the
+      <span class="inline-code">defaults</span> property like this:</p>
       <pre>
 var myApp = angular.module("myApp", ["<span class="highlight">pathgather.popeye</span>"]);
 myApp.config(function(<span class="highlight">PopeyeProvider</span>) {
