@@ -78,6 +78,11 @@
         var mod = angular.module("MyApp", [<span class="highlight">"pathgather.popeye"</span>]);
       </code>
     </p>
+    <br/>
+    <p>
+      If you want to use the default animations, you'll also need to include
+      <a target="_blank" href="https://docs.angularjs.org/api/ngAnimate" >ngAnimate</a>, too.
+    </p>
   </div>
   <div id="usage" class="step">
     <h2>Step 3: Popeye!</h3>
@@ -123,16 +128,28 @@ mod.controller("myCtrl", function($scope, <span class="highlight">Popeye</span>)
       </pre>
     </p>
   </div>
+  <div id="customize" class="step">
+    <h2>Step 4: Customize</h2>
+    <p>Popeye ships with default CSS that will size your modals, add a blue background, vertically & horizontally center
+    the modal, and add enter & leave animations. It's easy to customize all of this by adding your own
+    <span class="inline-code">containerClass</span> and <span class="inline-code">modalClass</span> classes and then
+    overriding the default rules. Here are a couple of examples:<br/>
+      <a href ng-click="ctrl.zoom()" class="button">Zoom!</a>
+      <a href ng-click="ctrl.small()" class="button">Small</a>
+      <a href ng-click="ctrl.boring()" class="button">Boring.</a>
+    </p>
+    <p>(Check the <a target="_blank" href="https://github.com/Pathgather/popeye/blob/gh-pages/src/demo.scss" >demo source code</a> to see
+    how these are done.)</p>
+  </div>
   <div id="documentation" class="step">
-    <h2>Step 4: Documentation</h2>
+    <h2>Step 5: Documentation</h2>
     <div id="openModal" class="documentation">
       <h3><span class="inline-code"><span class="highlight">Popeye</span>.openModal(options)</span></h3>
-      <p>Creates a new <span class="inline-code">PopeyeModal</span> with the given
+      <p>Creates a new <span class="inline-code highlight">PopeyeModal</span> with the given
       <span class="inline-code">options</span> and opens it. This will cause any existing modals to close first before
       the new modal is resolved and then opened.</p>
-      <p>Returns the new <span class="inline-code">PopeyeModal</span> instance, which you'll usually want to hold on to.</p>
-      <p>By default, <span class="highlight">Popeye</span> uses a <span class="inline-code">containerTemplate</span>
-      that looks like this: </p>
+      <p>Returns the new <span class="inline-code highlight">PopeyeModal</span> instance, which you'll usually want to hold on to.</p>
+      <p>By default, Popeye uses a <span class="inline-code">containerTemplate</span> that looks like this: </p>
       <pre>
 &lt;div class="popeye-modal-container"&gt;
   &lt;div class="popeye-modal"&gt;
@@ -140,7 +157,7 @@ mod.controller("myCtrl", function($scope, <span class="highlight">Popeye</span>)
     &lt;-- your modal template is appended here --&gt;
   &lt;/div&gt;
 &lt;/div&gt;</pre>
-      <p>The default styles in <span class="highlight">popeye.css</span> absolutely position the container to cover the
+      <p>The default styles in <span class="inline-code highlight">popeye.css</span> absolutely position the container to cover the
       entire window, centers the modal within that container, and positions the close link in the top right. You can, of
       course, override all of this with your own CSS, or change the <span class="inline-code">containerTemplate</span>
       to your own template if you prefer.</p>
@@ -211,9 +228,9 @@ mod.controller("myCtrl", function($scope, <span class="highlight">Popeye</span>)
           <td><span class="inline-code">containerTemplate</span><br/>(string)</td>
           <td>
             HTML template that acts as a container for the modal template. The compiled template is appended to this
-            container. By default, this is:
-            Note: if you override this, you must include a <span class="inline-code">.popeye-modal</span> element so that
-            the code knows where to insert your modal template
+            container.<br/><br/>
+            NOTE: if you override this option, you must include a <span class="inline-code">.popeye-modal</span> element
+            so that Popeye knows where to insert your modal template
           </td>
         </tr>
         <tr>
@@ -229,11 +246,11 @@ mod.controller("myCtrl", function($scope, <span class="highlight">Popeye</span>)
     <div id="closeCurrentModal" class="documentation">
       <h3><span class="inline-code"><span class="highlight">Popeye</span>.closeCurrentModal(value)</span></h3>
       <p>Calls <span class="inline-code">close(value)</span> on the currently active
-      <span class="inline-code">PopeyeModal</span> if there is one.</p>
-      <p>Returns the current <span class="inline-code">PopeyeModal</span> instance (which is now closing)</p>
+      <span class="inline-code highlight">PopeyeModal</span> if there is one.</p>
+      <p>Returns the current <span class="inline-code highlight">PopeyeModal</span> instance (which is now closing)</p>
     </div>
     <div id="PopeyeModal" class="documentation">
-      <h3><span class="inline-code"><span class="highlight">PopeyeModal</span></span></h3>
+      <h3><span class="inline-code highlight">PopeyeModal</span></h3>
       <p>This object handles resolving, opening, and closing modals. A new instance is created on each call to
       <span class="inline-code"><span class="highlight">Popeye</span>.openModal</span>. You can use this object to wait
       on the various promises to do something when the modal is resolved, opened, or closed. Each instance also exposes
@@ -314,9 +331,9 @@ mod.controller("myCtrl", function($scope, <span class="highlight">Popeye</span>)
     </div>
     <div id="PopeyeProvider" class="documentation">
       <h3><span class="inline-code"><span class="highlight">PopeyeProvider</span></span></h3>
-      <p>The Angular provider for the <span class="highlight">Popeye</span> service. You can use this provider to
-      configure default options for your application by modifying the <span class="inline-code">defaults</span>
-      property like this:</p>
+      <p>The Angular provider for the <span class="inline-code highlight">Popeye</span> service. You can use this
+      provider to configure default options for your application by modifying the
+      <span class="inline-code">defaults</span> property like this:</p>
       <pre>
 var myApp = angular.module("myApp", ["<span class="highlight">pathgather.popeye</span>"]);
 myApp.config(function(<span class="highlight">PopeyeProvider</span>) {

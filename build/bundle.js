@@ -3875,7 +3875,7 @@ module.exports = 'ngAnimate';
 * @copyright Pathgather 2015
 * @license MIT
 * @link https://github.com/Pathgather/popeye
-* @version 0.0.7
+* @version 0.0.8
 */
 
 (function() {
@@ -32978,6 +32978,30 @@ mod.controller("pgPopeyeDemoCtrl", function(Popeye) {
       });
     };
   })(this);
+  this.zoom = (function(_this) {
+    return function() {
+      return Popeye.openModal({
+        template: "<h2>Zoom!</h2>",
+        containerClass: "demo-container zoom"
+      });
+    };
+  })(this);
+  this.small = (function(_this) {
+    return function() {
+      return Popeye.openModal({
+        template: "<h2>Small</h2>",
+        modalClass: "demo-modal small"
+      });
+    };
+  })(this);
+  this.boring = (function(_this) {
+    return function() {
+      return Popeye.openModal({
+        template: "<h2>Boring.</h2>",
+        containerClass: "demo-container boring"
+      });
+    };
+  })(this);
   return this;
 });
 
@@ -33006,7 +33030,7 @@ mod.directive("pgBalloons", function($interval, $timeout) {
       scope.balloonOffsets = [];
       creatingBalloons = null;
       addBalloon = function() {
-        return scope.balloonOffsets.push(((Math.random() * 110) - 10) + "%");
+        return scope.balloonOffsets.push((Math.random() * 70) + 15 + "%");
       };
       removeBalloons = function() {
         return scope.balloonOffsets = [];

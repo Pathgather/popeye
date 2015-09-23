@@ -14,11 +14,107 @@ body {
   body {
     font-size: 90%;
   }
+
+  .step {
+    a.button {
+      display: block;
+    }
+  }
 }
 
 @media screen and (max-width: 20em) {
   body {
     font-size: 80%;
+  }
+}
+
+// Customize the Popeye defaults for all modals on the demo page
+.popeye-modal-container.demo-container {
+  .popeye-modal.demo-modal {
+    width: 50%;
+    min-width: 20em;
+    min-height: 25em;
+    text-align: center;
+
+    h2 {
+      margin: 1em;
+    }
+
+    img {
+      height: 12em;
+      margin-bottom: 1em;
+    }
+
+    .close-button {
+      margin: 0.5em auto;
+    }
+  }
+}
+
+// "Zoom!" example:
+// 1) Add "demo-container zoom" classes via "containerClass" option
+// 2) Change background to orange
+// 3) Speed up the modal container animation (defaults to 0.7s)
+// 4) Override the modal enter/leave animations to zoom-in and zoom-out
+.popeye-modal-container.demo-container.zoom {
+  background-color: rgba(246, 123, 69, 0.7);
+
+  &.ng-enter {
+    animation-duration: 0.5s;
+
+    .popeye-modal {
+      animation: zoom-in 0.5s ease-out;
+    }
+  }
+
+  &.ng-leave {
+    animation-duration: 0.5s;
+
+    .popeye-modal {
+      animation: zoom-out 0.5s ease-in;
+    }
+  }
+}
+
+@keyframes zoom-in {
+  0% { transform: translate(-50%, -50%) scale(0.1, 0.1) rotateZ(360deg); }
+  100% { transform: translate(-50%, -50%) scale(1, 1) rotateZ(0deg); }
+}
+
+@keyframes zoom-out {
+  0% { transform: translate(-50%, -50%) scale(1, 1) rotateZ(0deg); }
+  100% { transform: translate(-50%, -50%) scale(3, 3) rotateZ(-360deg); }
+}
+
+// "Small" example:
+// 1) Add "demo-modal small" classes via "modalClass" option
+// 2) Set width to smaller than normal
+.popeye-modal-container.demo-container .popeye-modal.demo-modal.small {
+  width: 30%;
+  min-height: 0;
+}
+
+// "Boring" example:
+// 1) Add "demo-container boring" classes via "containerClass" option
+// 2) Change background to grey
+// 3) Disable all enter/leave animations
+.popeye-modal-container.demo-container.boring {
+  background-color: rgba(0, 0, 0, 0.2);
+
+  &.ng-enter {
+    animation: none;
+
+    .popeye-modal {
+      animation: none;
+    }
+  }
+
+  &.ng-leave {
+    animation: none;
+
+    .popeye-modal {
+      animation: none;
+    }
   }
 }
 
@@ -53,13 +149,11 @@ body {
   }
 }
 
-#documentation {
+.documentation {
+  margin-bottom: 4em;
+
   p, pre {
     text-align: left;
-  }
-
-  .documentation {
-    margin-bottom: 4em;
   }
 }
 
@@ -120,16 +214,22 @@ pre, code {
   }
 }
 
-a.button {
-  font-size: 1.5em;
-  color: #fff;
-  background: $pg-blue;
-  border: 1px solid #aaa;
-  border-radius: 3px;
-  padding: 0.5em 1.4em;
-  margin-top: 1em;
-  display: inline-block;
+a {
+  color: $pg-blue;
   text-decoration: none;
+  font-weight: 600;
+
+  &.button {
+    font-size: 1.5em;
+    font-weight: 400;
+    color: #fff;
+    background: $pg-blue;
+    border: 1px solid #aaa;
+    border-radius: 3px;
+    padding: 0.5em 1.4em;
+    margin-top: 1em;
+    display: inline-block;
+  }
 }
 
 table {
@@ -155,61 +255,29 @@ table {
   }
 }
 
-.popeye-modal-container.demo-container {
-  .popeye-modal.demo-modal {
-    width: 50%;
-    min-width: 20em;
-    min-height: 25em;
-    text-align: center;
-
-    h2 {
-      margin: 1em;
-    }
-
-    img {
-      height: 12em;
-      margin-bottom: 1em;
-    }
-
-    .close-button {
-      margin: 0.5em auto;
-    }
-  }
-}
-
-.pg-balloons {
-  pointer-events: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  overflow: hidden;
-}
-
 .pg-balloon-container {
   pointer-events: none;
   z-index: 10;
   position: absolute;
   top: 0.3em;
   height: 100%;
+  transform: translate(-50%, 0%);
 
   &.ng-enter {
     transition: transform 3s ease-out;
-    transform: translateY(100%);
+    transform: translate(-50%, 100%);
 
     &.ng-enter-active {
-      transform: translateY(0%);
+      transform: translate(-50%, 0%);
     }
   }
 
   &.ng-leave {
     transition: transform 6s ease-in;
-    transform: translateY(0%);
+    transform: translate(-50%, 0%);
 
     &.ng-leave-active {
-      transform: translateY(-200%);
+      transform: translate(-50%, -200%);
     }
   }
 
@@ -275,14 +343,8 @@ table {
 }
 
 @keyframes swing {
-  0% {
-    transform: rotate($swing-angle);
-  }
-  50% {
-    transform: rotate(-$swing-angle);
-  }
-  100% {
-    transform: rotate($swing-angle);
-  }
+  0% { transform: rotate($swing-angle); }
+  50% { transform: rotate(-$swing-angle); }
+  100% { transform: rotate($swing-angle); }
 }
 
