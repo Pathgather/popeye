@@ -23,7 +23,17 @@ body {
   }
 }
 
-@media screen and (max-width: 20em) {
+@media screen and (max-height: 30em) {
+  body {
+    font-size: 90%;
+  }
+
+  .popeye-modal.demo-modal img {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 20em), screen and (max-height: 20em) {
   body {
     font-size: 80%;
   }
@@ -32,22 +42,14 @@ body {
 // Customize the Popeye defaults for all modals on the demo page
 .popeye-modal-container.demo-container {
   .popeye-modal.demo-modal {
-    width: 50%;
-    min-width: 20em;
-    min-height: 25em;
+    width: 40%;
+    min-width: 18em;
+    min-height: 10em;
     text-align: center;
 
-    h2 {
-      margin: 1em;
-    }
-
     img {
-      height: 12em;
+      height: 10em;
       margin-bottom: 1em;
-    }
-
-    .close-button {
-      margin: 0.5em auto;
     }
   }
 }
@@ -89,10 +91,12 @@ body {
 
 // "Small" example:
 // 1) Add "demo-modal small" classes via "modalClass" option
-// 2) Set width to smaller than normal
+// 2) Set width to smaller than normal, tweak padding
 .popeye-modal-container.demo-container .popeye-modal.demo-modal.small {
   width: 30%;
+  min-width: 0;
   min-height: 0;
+  padding: 1.5em 0.5em 0.5em 0.5em;
 }
 
 // "Boring" example:

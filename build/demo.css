@@ -14,22 +14,24 @@ body {
   .step a.button {
     display: block; } }
 
-@media screen and (max-width: 20em) {
+@media screen and (max-height: 30em) {
+  body {
+    font-size: 90%; }
+  .popeye-modal.demo-modal img {
+    display: none; } }
+
+@media screen and (max-width: 20em), screen and (max-height: 20em) {
   body {
     font-size: 80%; } }
 
 .popeye-modal-container.demo-container .popeye-modal.demo-modal {
-  width: 50%;
-  min-width: 20em;
-  min-height: 25em;
+  width: 40%;
+  min-width: 18em;
+  min-height: 10em;
   text-align: center; }
-  .popeye-modal-container.demo-container .popeye-modal.demo-modal h2 {
-    margin: 1em; }
   .popeye-modal-container.demo-container .popeye-modal.demo-modal img {
-    height: 12em;
+    height: 10em;
     margin-bottom: 1em; }
-  .popeye-modal-container.demo-container .popeye-modal.demo-modal .close-button {
-    margin: 0.5em auto; }
 
 .popeye-modal-container.demo-container.zoom {
   background-color: rgba(246, 123, 69, 0.7); }
@@ -80,7 +82,9 @@ body {
 
 .popeye-modal-container.demo-container .popeye-modal.demo-modal.small {
   width: 30%;
-  min-height: 0; }
+  min-width: 0;
+  min-height: 0;
+  padding: 1.5em 0.5em 0.5em 0.5em; }
 
 .popeye-modal-container.demo-container.boring {
   background-color: rgba(0, 0, 0, 0.2); }
