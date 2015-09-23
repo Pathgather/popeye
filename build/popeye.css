@@ -6,7 +6,7 @@
 * @copyright Pathgather 2015
 * @license MIT
 * @link https://github.com/Pathgather/popeye
-* @version 0.0.8
+* @version 1.0.1
 */
 
 body.popeye-modal-open {
@@ -22,14 +22,14 @@ body.popeye-modal-open {
   overflow-y: auto;
   background-color: rgba(76, 147, 234, 0.7); }
   .popeye-modal-container.ng-enter {
-    -webkit-animation: popeye-fade-in 0.7s;
-            animation: popeye-fade-in 0.7s; }
+    -webkit-animation: popeye-fade-in 0.4s;
+            animation: popeye-fade-in 0.4s; }
     .popeye-modal-container.ng-enter .popeye-modal {
       -webkit-animation: popeye-slide-up 0.4s;
               animation: popeye-slide-up 0.4s; }
   .popeye-modal-container.ng-leave {
-    -webkit-animation: popeye-fade-out 0.7s;
-            animation: popeye-fade-out 0.7s; }
+    -webkit-animation: popeye-fade-out 0.4s;
+            animation: popeye-fade-out 0.4s; }
     .popeye-modal-container.ng-leave .popeye-modal {
       -webkit-animation: popeye-slide-down 0.4s forwards;
               animation: popeye-slide-down 0.4s forwards; }
