@@ -1,6 +1,6 @@
 {
   "name": "angular-popeye",
-  "version": "0.0.8",
+  "version": "1.0.0",
   "description": "A simple modal library for AngularJS applications",
   "files": [
     "release/"
