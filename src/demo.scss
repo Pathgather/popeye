@@ -8,6 +8,7 @@ body {
   font-family: 'Open Sans', sans-serif;
   color: #666;
   line-height: 1.2;
+  height: 100%;
 }
 
 @media screen and (max-width: 30em) {
@@ -258,7 +259,7 @@ table {
 .pg-balloon-container {
   pointer-events: none;
   z-index: 10;
-  position: absolute;
+  position: fixed;
   top: 0.3em;
   height: 100%;
   transform: translate(-50%, 0%);
