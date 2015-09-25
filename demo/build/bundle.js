@@ -33049,11 +33049,13 @@ module.exports = angular;
     });
   };
 
-  if (typeof require === "function") {
+  if ((typeof window !== "undefined" && window !== null ? window.angular : void 0) != null) {
+    popeye(window.angular);
+  } else if (typeof require === "function") {
     angular = require("angular");
     popeye(angular);
   } else {
-    popeye(window.angular);
+    throw new Error("Could not find angular on window nor via require()");
   }
 
   if (typeof module !== "undefined" && module !== null) {

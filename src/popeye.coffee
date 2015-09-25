@@ -176,12 +176,14 @@ popeye = (angular) ->
     }
 
 
-# Use Browserify to require angular, if possible. Otherwise, expect angular on the window
-if typeof require == "function"
+# Check for angular on the window; otherwise, use require() to find it
+if window?.angular?
+  popeye(window.angular)
+else if typeof require == "function"
   angular = require "angular"
   popeye(angular)
 else
-  popeye(window.angular)
+  throw new Error("Could not find angular on window nor via require()")
 
 # Define CommonJS-style module.exports
 if module?
