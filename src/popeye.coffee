@@ -136,8 +136,10 @@ popeye = (angular) ->
                     $animate.enter(@container, body, bodyLastChild).then =>
                       currentModal = @
                       @openedDeferred.resolve(@)
-            , (error) =>
+            .catch (error) =>
               @handleError(error)
+            .finally ->
+              pendingPromise = null
             return @opened
 
           # Remove the modal container from the DOM via $animate
