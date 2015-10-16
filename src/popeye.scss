@@ -17,6 +17,7 @@ body.popeye-modal-open {
   z-index: $popeye-z-index;
   overflow-y: auto;
   background-color: $popeye-bg;
+  text-align: center; // horizontal alignment for the modal itself
 
   &.ng-enter {
     animation: popeye-fade-in $popeye-container-anim-duration;
@@ -34,12 +35,20 @@ body.popeye-modal-open {
     }
   }
 
+  /* "ghost" element to use for vertical alignment
+    (see https://css-tricks.com/centering-in-the-unknown/) */
+  &::before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+  }
+
   .popeye-modal {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: block;
+    position: relative;
+    text-align: initial; // don't inherit text-align: center
+    vertical-align: middle;
+    display: inline-block;
     width: 60%;
     border-radius: 3px;
     border: none;
@@ -66,24 +75,24 @@ body.popeye-modal-open {
 @keyframes popeye-slide-up {
   0% {
     opacity: 0;
-    transform: translate(-50%, 50%);
+    transform: translateY(100%);
   }
 
   100% {
     opacity: 1;
-    transform: translate(-50%, -50%);
+    transform: translateY(0%);
   }
 }
 
 @keyframes popeye-slide-down {
   0% {
     opacity: 1;
-    transform: translate(-50%, -50%);
+    transform: translateY(0%);
   }
 
   100% {
     opacity: 0;
-    transform: translate(-50%, 50%);
+    transform: translateY(100%);
   }
 }
 
