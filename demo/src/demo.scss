@@ -80,13 +80,13 @@ body {
 }
 
 @keyframes zoom-in {
-  0% { transform: translate(-50%, -50%) scale(0.1, 0.1) rotateZ(360deg); }
-  100% { transform: translate(-50%, -50%) scale(1, 1) rotateZ(0deg); }
+  0% { transform: scale(0.1, 0.1) rotateZ(360deg); }
+  100% { transform: scale(1, 1) rotateZ(0deg); }
 }
 
 @keyframes zoom-out {
-  0% { transform: translate(-50%, -50%) scale(1, 1) rotateZ(0deg); }
-  100% { transform: translate(-50%, -50%) scale(3, 3) rotateZ(-360deg); }
+  0% { transform: scale(1, 1) rotateZ(0deg); }
+  100% { transform: scale(3, 3) rotateZ(-360deg); }
 }
 
 // "Small" example:
