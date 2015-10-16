@@ -32965,7 +32965,7 @@ module.exports = angular;
 * @copyright Pathgather 2015
 * @license MIT
 * @link https://github.com/Pathgather/popeye
-* @version 1.0.3
+* @version 1.0.4
 */
 
 (function() {

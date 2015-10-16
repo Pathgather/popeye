@@ -6,7 +6,7 @@
 * @copyright Pathgather 2015
 * @license MIT
 * @link https://github.com/Pathgather/popeye
-* @version 1.0.3
+* @version 1.0.4
 */
 
 body.popeye-modal-open {
@@ -43,7 +43,7 @@ body.popeye-modal-open {
     vertical-align: middle; }
   .popeye-modal-container .popeye-modal {
     position: relative;
-    text-align: initial;
+    text-align: left;
     vertical-align: middle;
     display: inline-block;
     width: 60%;
