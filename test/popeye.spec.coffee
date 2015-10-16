@@ -328,6 +328,25 @@ describe "pathgather.popeye", ->
           expect(oldModalClosed).toBe(true)
           expect(newModalOpened).toBe(true)
 
+      describe "when a previous modal open failed", ->
+        beforeEach ->
+          @modal = @Popeye.openModal(
+            templateUrl: "modal_template.html"
+            resolve: { data: => @$q.reject("Oh no!") }
+          )
+          error = false
+          @modal.opened.catch -> error = true
+          @$rootScope.$digest()
+          expect(error).toBe(true)
+
+        it "cleans up the shared state, and the next open succeeds", ->
+          newModal = @Popeye.openModal(templateUrl: "modal_template.html")
+          newModalOpened = false
+          newModal.opened.then -> newModalOpened = true
+          expect(newModalOpened).toBe(false)
+          @$animate.flush()
+          expect(newModalOpened).toBe(true)
+
       describe "when opening multiple modals in series", ->
         it "opens them in calling order, after closing the previous first", ->
           modal1 = @Popeye.openModal(templateUrl: "modal_template.html", id: "modal1")
