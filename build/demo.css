@@ -50,35 +50,35 @@ body {
 
 @-webkit-keyframes zoom-in {
   0% {
-    -webkit-transform: translate(-50%, -50%) scale(0.1, 0.1) rotateZ(360deg);
-            transform: translate(-50%, -50%) scale(0.1, 0.1) rotateZ(360deg); }
+    -webkit-transform: scale(0.1, 0.1) rotateZ(360deg);
+            transform: scale(0.1, 0.1) rotateZ(360deg); }
   100% {
-    -webkit-transform: translate(-50%, -50%) scale(1, 1) rotateZ(0deg);
-            transform: translate(-50%, -50%) scale(1, 1) rotateZ(0deg); } }
+    -webkit-transform: scale(1, 1) rotateZ(0deg);
+            transform: scale(1, 1) rotateZ(0deg); } }
 
 @keyframes zoom-in {
   0% {
-    -webkit-transform: translate(-50%, -50%) scale(0.1, 0.1) rotateZ(360deg);
-            transform: translate(-50%, -50%) scale(0.1, 0.1) rotateZ(360deg); }
+    -webkit-transform: scale(0.1, 0.1) rotateZ(360deg);
+            transform: scale(0.1, 0.1) rotateZ(360deg); }
   100% {
-    -webkit-transform: translate(-50%, -50%) scale(1, 1) rotateZ(0deg);
-            transform: translate(-50%, -50%) scale(1, 1) rotateZ(0deg); } }
+    -webkit-transform: scale(1, 1) rotateZ(0deg);
+            transform: scale(1, 1) rotateZ(0deg); } }
 
 @-webkit-keyframes zoom-out {
   0% {
-    -webkit-transform: translate(-50%, -50%) scale(1, 1) rotateZ(0deg);
-            transform: translate(-50%, -50%) scale(1, 1) rotateZ(0deg); }
+    -webkit-transform: scale(1, 1) rotateZ(0deg);
+            transform: scale(1, 1) rotateZ(0deg); }
   100% {
-    -webkit-transform: translate(-50%, -50%) scale(3, 3) rotateZ(-360deg);
-            transform: translate(-50%, -50%) scale(3, 3) rotateZ(-360deg); } }
+    -webkit-transform: scale(3, 3) rotateZ(-360deg);
+            transform: scale(3, 3) rotateZ(-360deg); } }
 
 @keyframes zoom-out {
   0% {
-    -webkit-transform: translate(-50%, -50%) scale(1, 1) rotateZ(0deg);
-            transform: translate(-50%, -50%) scale(1, 1) rotateZ(0deg); }
+    -webkit-transform: scale(1, 1) rotateZ(0deg);
+            transform: scale(1, 1) rotateZ(0deg); }
   100% {
-    -webkit-transform: translate(-50%, -50%) scale(3, 3) rotateZ(-360deg);
-            transform: translate(-50%, -50%) scale(3, 3) rotateZ(-360deg); } }
+    -webkit-transform: scale(3, 3) rotateZ(-360deg);
+            transform: scale(3, 3) rotateZ(-360deg); } }
 
 .popeye-modal-container.demo-container .popeye-modal.demo-modal.small {
   width: 30%;

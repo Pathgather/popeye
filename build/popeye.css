@@ -6,7 +6,7 @@
 * @copyright Pathgather 2015
 * @license MIT
 * @link https://github.com/Pathgather/popeye
-* @version 1.0.2
+* @version 1.0.3
 */
 
 body.popeye-modal-open {
@@ -20,7 +20,10 @@ body.popeye-modal-open {
   top: 0;
   z-index: 5;
   overflow-y: auto;
-  background-color: rgba(76, 147, 234, 0.7); }
+  background-color: rgba(76, 147, 234, 0.7);
+  text-align: center;
+  /* "ghost" element to use for vertical alignment
+    (see https://css-tricks.com/centering-in-the-unknown/) */ }
   .popeye-modal-container.ng-enter {
     -webkit-animation: popeye-fade-in 0.4s;
             animation: popeye-fade-in 0.4s; }
@@ -33,14 +36,16 @@ body.popeye-modal-open {
     .popeye-modal-container.ng-leave .popeye-modal {
       -webkit-animation: popeye-slide-down 0.4s forwards;
               animation: popeye-slide-down 0.4s forwards; }
+  .popeye-modal-container::before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle; }
   .popeye-modal-container .popeye-modal {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-        -ms-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
-    display: block;
+    position: relative;
+    text-align: initial;
+    vertical-align: middle;
+    display: inline-block;
     width: 60%;
     border-radius: 3px;
     border: none;
@@ -61,42 +66,42 @@ body.popeye-modal-open {
 @-webkit-keyframes popeye-slide-up {
   0% {
     opacity: 0;
-    -webkit-transform: translate(-50%, 50%);
-            transform: translate(-50%, 50%); }
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%); }
   100% {
     opacity: 1;
-    -webkit-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%); } }
+    -webkit-transform: translateY(0%);
+            transform: translateY(0%); } }
 
 @keyframes popeye-slide-up {
   0% {
     opacity: 0;
-    -webkit-transform: translate(-50%, 50%);
-            transform: translate(-50%, 50%); }
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%); }
   100% {
     opacity: 1;
-    -webkit-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%); } }
+    -webkit-transform: translateY(0%);
+            transform: translateY(0%); } }
 
 @-webkit-keyframes popeye-slide-down {
   0% {
     opacity: 1;
-    -webkit-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%); }
+    -webkit-transform: translateY(0%);
+            transform: translateY(0%); }
   100% {
     opacity: 0;
-    -webkit-transform: translate(-50%, 50%);
-            transform: translate(-50%, 50%); } }
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%); } }
 
 @keyframes popeye-slide-down {
   0% {
     opacity: 1;
-    -webkit-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%); }
+    -webkit-transform: translateY(0%);
+            transform: translateY(0%); }
   100% {
     opacity: 0;
-    -webkit-transform: translate(-50%, 50%);
-            transform: translate(-50%, 50%); } }
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%); } }
 
 @-webkit-keyframes popeye-fade-in {
   0% {

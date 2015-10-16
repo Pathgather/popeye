@@ -3941,7 +3941,7 @@ module.exports = 'ngAnimate';
 * @copyright Pathgather 2015
 * @license MIT
 * @link https://github.com/Pathgather/popeye
-* @version 1.0.2
+* @version 1.0.3
 */
 
 (function() {
@@ -4105,11 +4105,13 @@ module.exports = 'ngAnimate';
                     });
                   });
                 };
-              })(this), (function(_this) {
+              })(this))["catch"]((function(_this) {
                 return function(error) {
                   return _this.handleError(error);
                 };
-              })(this));
+              })(this))["finally"](function() {
+                return pendingPromise = null;
+              });
               return this.opened;
             };
 
