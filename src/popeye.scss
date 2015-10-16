@@ -46,7 +46,7 @@ body.popeye-modal-open {
 
   .popeye-modal {
     position: relative;
-    text-align: initial; // don't inherit text-align: center
+    text-align: left; // reset text-align (I'd use "initial", but IE doesn't support it)
     vertical-align: middle;
     display: inline-block;
     width: 60%;
