@@ -6,7 +6,7 @@
 * @copyright Pathgather 2015
 * @license MIT
 * @link https://github.com/Pathgather/popeye
-* @version 1.0.4
+* @version 1.0.5
 */
 
 (function() {
@@ -30,7 +30,8 @@
           resolve: null,
           scope: null,
           controller: null,
-          keyboard: true
+          keyboard: true,
+          click: true
         },
         $get: ["$q", "$animate", "$rootScope", "$document", "$http", "$templateCache", "$compile", "$controller", "$injector", function($q, $animate, $rootScope, $document, $http, $templateCache, $compile, $controller, $injector) {
           var PopeyeModal, currentModal, pendingPromise;
@@ -145,11 +146,13 @@
                       return templatePromise.then(function(tmpl) {
                         var body, bodyLastChild;
                         angular.element(containerElement[0].querySelector(".popeye-modal")).append(tmpl.data);
-                        containerElement.on("click", function(evt) {
-                          if (evt.target === evt.currentTarget) {
-                            return _this.close();
-                          }
-                        });
+                        if (_this.options.click) {
+                          containerElement.on("click", function(evt) {
+                            if (evt.target === evt.currentTarget) {
+                              return _this.close();
+                            }
+                          });
+                        }
                         _this.container = $compile(containerElement)(_this.scope);
                         _this.element = angular.element(_this.container[0].querySelector(".popeye-modal"));
                         if (_this.options.modalClass) {
@@ -229,6 +232,9 @@
                 currentModal.close(value);
               }
               return currentModal;
+            },
+            isModalOpen: function() {
+              return !!currentModal;
             }
           };
         }]
