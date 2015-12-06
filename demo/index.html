@@ -68,7 +68,7 @@
         <br/>
         <span class="comment">&lt;!-- optional, if you want some default styles and animation --&gt;</span>
         <br/>
-        &lt;script src="path/to/angular-popeye/release/<span class="highlight">popeye.css</span>"&gt;&lt;/script&gt;
+        &lt;link rel="stylesheet" href="path/to/angular-popeye/release/<span class="highlight">popeye.css</span>" /&gt;
       </code>
     </p>
     <br/>
@@ -238,6 +238,19 @@ mod.controller("myCtrl", function($scope, <span class="highlight">Popeye</span>)
           <td>URL to GET the HTML template that will provide a container for the modal template. This is overriden by
             <span class="inline-code">containerTemplate</span>, which has a default value, so you'll need to set that to
             null in order to use this option
+          </td>
+        </tr>
+        <tr>
+          <td><span class="inline-code">keyboard</span><br/>(boolean)</td>
+          <td>
+            Whether or not the ESC key should close the current modal. Default is true.
+          </td>
+        </tr>
+        <tr>
+          <td><span class="inline-code">click</span><br/>(boolean)</td>
+          <td>
+            Whether or not clicking on the modal container element should close the current modal. Default is true.
+          </td>
         </tr>
       </tbody>
       </table>
@@ -248,6 +261,10 @@ mod.controller("myCtrl", function($scope, <span class="highlight">Popeye</span>)
       <p>Calls <span class="inline-code">close(value)</span> on the currently active
       <span class="inline-code highlight">PopeyeModal</span> if there is one.</p>
       <p>Returns the current <span class="inline-code highlight">PopeyeModal</span> instance (which is now closing)</p>
+    </div>
+    <div id="isModalOpen" class="documentation">
+      <h3><span class="inline-code"><span class="highlight">Popeye</span>.isModalOpen()</span></h3>
+      <p>Returns whether or not a modal is currently open.</p>
     </div>
     <div id="PopeyeModal" class="documentation">
       <h3><span class="inline-code highlight">PopeyeModal</span></h3>
