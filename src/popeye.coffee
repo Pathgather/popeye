@@ -28,6 +28,7 @@ popeye = (angular) ->
         scope: null
         controller: null
         keyboard: true
+        click: true
 
       $get: ($q, $animate, $rootScope, $document, $http, $templateCache, $compile, $controller, $injector) ->
 
@@ -123,7 +124,8 @@ popeye = (angular) ->
 
                   templatePromise.then (tmpl) =>
                     angular.element(containerElement[0].querySelector(".popeye-modal")).append(tmpl.data)
-                    containerElement.on "click", (evt) => @close() if evt.target == evt.currentTarget
+                    if @options.click
+                      containerElement.on "click", (evt) => @close() if evt.target == evt.currentTarget
                     @container = $compile(containerElement)(@scope)
                     @element = angular.element(@container[0].querySelector(".popeye-modal"))
                     @element.addClass(@options.modalClass) if @options.modalClass
@@ -174,6 +176,9 @@ popeye = (angular) ->
           closeCurrentModal: (value) ->
             currentModal?.close(value)
             return currentModal
+
+          isModalOpen: () ->
+            return !!currentModal
         }
     }
 
