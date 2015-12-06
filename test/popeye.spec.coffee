@@ -237,6 +237,18 @@ describe "pathgather.popeye", ->
           @$document.trigger(evt)
           expect(@modal.closing).not.toBe(true)
 
+      describe "with click false", ->
+        beforeEach ->
+          @modal = @Popeye.openModal(
+            templateUrl: "modal_template.html"
+            click: false
+          )
+          @$animate.flush()
+
+        it "does not close modal when the container element is clicked", ->
+          @modal.container.trigger("click")
+          expect(@modal.closing).not.toBe(true)
+
       describe "with locals", ->
         beforeEach ->
           @data = "foo"
@@ -421,3 +433,20 @@ describe "pathgather.popeye", ->
         @Popeye.closeCurrentModal()
         @$rootScope.$digest()
         expect(@$animate.leave.calls.count()).toBe(1)
+
+    describe "isModalOpen", ->
+      it "returns false if no modal is open", ->
+        expect(@Popeye.isModalOpen()).toBe(false)
+
+      it "returns true if a modal is open", ->
+        @modal = @Popeye.openModal(templateUrl: "modal_template.html")
+        @$animate.flush()
+        expect(@Popeye.isModalOpen()).toBe(true)
+
+      it "returns false after the current modal is closed", ->
+        @modal = @Popeye.openModal(templateUrl: "modal_template.html")
+        @$animate.flush()
+        expect(@Popeye.isModalOpen()).toBe(true)
+        @Popeye.closeCurrentModal()
+        @$animate.flush()
+        expect(@Popeye.isModalOpen()).toBe(false)
