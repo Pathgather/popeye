@@ -218,6 +218,7 @@ table {
   .pg-balloon-container.ng-enter {
     transition: -webkit-transform 3s ease-out;
     transition: transform 3s ease-out;
+    transition: transform 3s ease-out, -webkit-transform 3s ease-out;
     -webkit-transform: translate(-50%, 100%);
         -ms-transform: translate(-50%, 100%);
             transform: translate(-50%, 100%); }
@@ -228,6 +229,7 @@ table {
   .pg-balloon-container.ng-leave {
     transition: -webkit-transform 6s ease-in;
     transition: transform 6s ease-in;
+    transition: transform 6s ease-in, -webkit-transform 6s ease-in;
     -webkit-transform: translate(-50%, 0%);
         -ms-transform: translate(-50%, 0%);
             transform: translate(-50%, 0%); }
